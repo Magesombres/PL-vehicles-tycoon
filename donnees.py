@@ -98,7 +98,6 @@ def kit_de_depart():
 
 
 # --- Adversaires -----------------------------------------------------------
-
 def adversaire(cle):
     """Fabrique un adversaire neuf (véhicule et PV remis à zéro)."""
     fabriques = {
@@ -130,6 +129,30 @@ def adversaire(cle):
             "Brigade des douanes volantes",
             creer_vehicule("avion", ["Moteur V12", "Ailes alu", "Coque titane"], "Avion de patrouille"),
             5, 300, "Contrôle de routine ! Vous transportez des bananes ?"),
+        "lisa": lambda: Adversaire(
+            "La Lisa mobile",
+            creer_vehicule("33 tonnes", ["Moteur de trotinette", "pneu carré"*4, "Coque rinoshield"], "indescamion"),
+            3, 67, "Je sais pas ça dépend pourquoi j'ai tué la personne"),
+        "julien": lambda: Adversaire(
+            "Ride a bike",
+            creer_vehicule("cyclo-moteur", ["Moteur d'avion de chasse", "chenille (l'animal)"*2, "chasse des scies"], "Le cyclo-démonteur"),
+            6, 700, "Qui pisse face au vent s'en rince les dents"),
+        "etham": lambda: Adversaire(
+            "La coulombie",
+            creer_vehicule("roller", ["petit mais puissant", "les petites roues"*8, "sacré chassis"], "Lauralleur"),
+            1, 10, "Tout pour les states"),
+        "crombez": lambda: Adversaire(
+            "la treu-treu 3000",
+            creer_vehicule("treu-treu", ["le mot 'teur'", "ailes de poulet", "la coke"], "LA treu-treu a la colique"),
+            8, 587, "Avec le linge les cours et les repas j'ai quand même le temps de te battre"),
+        "Arnaud": lambda: Adversaire(
+            "Le vélo sacré de Mr Arnaud",
+            creer_vehicule("velo dit 'vin'", ["les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout"),
+            66, 10000000, "C'est normal que ca marche pas ça à pas de pieds"),
+        "Bezard": lambda: Adversaire(
+            "LE bouc à Bezard",
+            creer_vehicule("'j'suis,pas s'agitaire j'suis bélier'", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
+            1789, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
     }
     return fabriques[cle]()
 
