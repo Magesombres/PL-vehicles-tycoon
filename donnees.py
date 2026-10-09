@@ -140,7 +140,7 @@ def adversaire(cle):
         "etham": lambda: Adversaire(
             "La coulombie",
             creer_vehicule("roller", ["petit mais puissant", "les petites roues"*8, "sacré chassis"], "Lauralleur"),
-            1, 10, "Tout pour les states"),
+            2, 100, "Tout pour les states"),
         "crombez": lambda: Adversaire(
             "la treu-treu 3000",
             creer_vehicule("treu-treu", ["le mot 'teur'", "ailes de poulet", "la coke"], "LA treu-treu a la colique"),
@@ -148,15 +148,23 @@ def adversaire(cle):
         "Arnaud": lambda: Adversaire(
             "Le vélo sacré de Mr Arnaud",
             creer_vehicule("velo dit 'vin'", ["les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout"),
-            66, 10000000, "C'est normal que ca marche pas ça à pas de pieds"),
+            11, 10000000, "C'est normal que ca marche pas ça à pas de pieds"),
         "Bezard": lambda: Adversaire(
             "LE bouc à Bezard",
             creer_vehicule("'j'suis,pas s'agitaire j'suis bélier'", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
-            1789, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
+            11, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
         "smegma": lambda: Adversaire(
             "LA smeg-moblie",
             creer_vehicule("voiture", ["smeg-roue"*4, "le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
             7, 800, "Merci pour seub"),
+        "Bally Bagayoko": lambda: Adversaire(
+            "La blocus-mobile",
+            creer_vehicule("costard-cravate", ["la force du titan","transport de poubelles enflammées","retenir les foules"], "les rots du peuples"),
+            11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
+        "Bally Bagayoko": lambda: Adversaire(
+            "La blocus-mobile",
+            creer_vehicule("costard-cravate", ["la force du titan","transport de poubelles enflammées","retenir les foules"], "les rots du peuples"),
+            11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
     }
     return fabriques[cle]()
 
