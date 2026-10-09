@@ -153,6 +153,10 @@ def adversaire(cle):
             "LE bouc à Bezard",
             creer_vehicule("'j'suis,pas s'agitaire j'suis bélier'", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
             1789, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
+        "smegma": lambda: Adversaire(
+            "LA smeg-moblie",
+            creer_vehicule("voiture", ["smeg-roue"*4, "le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
+            7, 800, "Merci pour seub"),
     }
     return fabriques[cle]()
 
