@@ -10,29 +10,71 @@ MODELES = {
     "voiture": Modele("Voiture", ["roue", "roue", "roue", "roue", "moteur", "chassis"]),
     "bateau": Modele("Bateau", ["moteur", "coque", "poste de pilotage"]),
     "avion": Modele("Avion", ["moteur", "ailes", "coque"]),
-    "trottinette": Modele("Trottinette", ["roue", "roue", "moteur"]),
+    "velo": Modele("velo", ["roue", "roue", "armature"]),
+    "cyclo-moteur": Modele("Cyclo-moteur", ["moteur", "roue", "roue", "chassis"]),
+    "33 tonnes": Modele("33 tonnes", ["moteur", "roue", "roue", "roue", "roue", "chassis"]),
+    "roller": Modele("Roller", ["moteur", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "chassis"]),
+    "velo dit 'vin'": Modele("Vélo dit 'vin'", ["Moteur", "roue", "roue", "chassis", "gear", "gear"]),
 }
 
 CATALOGUE = [
     # Moteurs
     Piece("Moteur banane", "moteur", 5, {"puissance": 2, "vitesse": 5, "poids": 1}, ["banane"]),
-    Piece("Moteur de tondeuse", "moteur", 30, {"puissance": 10, "vitesse": 15, "poids": 5}),
+    Piece("Moteur de tondeuse a cheveux", "moteur", 14, {"puissance": 6, "vitesse": 9, "poids": 3}),
+    Piece("Moteur V8", "moteur", 80, {"puissance": 30, "vitesse": 30, "poids": 15}),
     Piece("Moteur V12", "moteur", 100, {"puissance": 40, "vitesse": 40, "poids": 20}),
+    Piece("Moteur F1", "moteur", 200, {"puissance": 100, "vitesse": 100, "poids": 50}),
     Piece("Moteur fusée", "moteur", 600, {"puissance": 2000, "vitesse": 500, "poids": 400}, ["fusee"]),
+    Piece("Moteur de trotinette", "moteur", 20, {"puissance": 10, "vitesse": 15, "poids": 5}),
+    Piece("Moteur d'avion de chasse", "moteur", 300, {"puissance": 200, "vitesse": 200, "poids": 100}),
+    Piece("Petit mais puissant", "moteur", 50, {"puissance": 20, "vitesse": 25, "poids": 10}),
+    Piece("Mot 'teur'", "moteur", 70, {"puissance": 25, "vitesse": 30, "poids": 15}),
+    Piece("Les gambettes du démon", "moteur", 999, {"puissance": 800, "vitesse": 666, "poids": 10}, ["demon"]),
     # Roues
     Piece("Roue caoutchouc", "roue", 10, {"vitesse": 5, "resistance": 5, "poids": 2}),
     Piece("Roue bambou", "roue", 4, {"vitesse": 8, "resistance": 1}),
     Piece("Chenilles", "roue", 40, {"vitesse": 1, "resistance": 25, "poids": 10}, ["chenilles"]),
+    Piece("Roue en or", "roue", 100, {"vitesse": 20, "resistance": 10, "poids": 5}, ["or"]),
+    Piece("Roller", "roue", 30, {"vitesse": 15, "resistance": 2, "poids": 1}),
+    Piece("pneu carrée", "roue", 20, {"vitesse": 5, "resistance": 5, "poids": 3}, ["carré"]),
+    Piece("Chenille (l'animal)", "roue", 15, {"vitesse": 2, "resistance": 10, "poids": 5}, ["chenille"]),
+    Piece("les petites roues", "roue", 5, {"vitesse": 3, "resistance": 1, "poids": 1}, ["petit"]),
+    Piece("roue arriere de l'avant ", "roue", 250, {"vitesse": 500, "resistance": 1000, "poids": 2}, ["arriere"]),
+    Piece("roue arriere de l'arriere ", "roue", 250, {"vitesse": 1000, "resistance": 500, "poids": 2}, ["arriere"]),
+    
     # Châssis
     Piece("Châssis bois", "chassis", 15, {"resistance": 20, "poids": 10}),
     Piece("Châssis acier", "chassis", 60, {"resistance": 60, "poids": 30}),
     Piece("Châssis carton", "chassis", 2, {"resistance": 3, "poids": 1}, ["carton"]),
+    Piece("Coque Rhinoshield", "chassis", 200, {"resistance": 200, "poids": 100}, ["rhinoshield"]),
+    Piece("chasse des scies", "chassis", 100, {"resistance": 50, "poids": 20}, ["scie"]),
+    Piece("Sacré châssis", "chassis", 500, {"resistance": 500, "poids": 200}, ["sacré"]),
+    Piece("Le chat sept", "chassis", 300, {"resistance": 666, "poids": 150}, ["chat"]),
     # Bateaux et avions
     Piece("Coque gonflable", "coque", 20, {"resistance": 15, "vitesse": 5, "poids": 3}),
     Piece("Coque titane", "coque", 150, {"resistance": 100, "poids": 40}),
     Piece("Poste de pilotage basique", "poste de pilotage", 20, {"vitesse": 10}),
     Piece("Ailes en papier", "ailes", 8, {"vitesse": 25, "resistance": 1}, ["papier"]),
     Piece("Ailes alu", "ailes", 80, {"vitesse": 60, "resistance": 20, "poids": 15}),
+    Piece("Aile de poulet", "ailes", 5, {"vitesse": 10, "resistance": 1}, ["poulet"]),
+    Piece("La coke", "ailes", 100, {"vitesse": 100, "resistance": 50, "poids": 20}, ["coke"]),
+
+    # Armatures
+    Piece("Armature en bois", "armature", 10, {"resistance": 15, "poids": 5}),
+    Piece("Armature métallique", "armature", 50, {"resistance": 50, "poids": 20}),
+
+    # Gears
+    Piece("Turbo", "gear", 100, {"vitesse": 20, "poids": 5}),
+    Piece("Canon", "gear", 300, {"puissance": 250, "poids": 50}),
+    Piece("Bouclier", "gear", 200, {"resistance": 100, "poids": 30}),
+    Piece("Ailerons", "gear", 150, {"vitesse": 15, "poids": 10}),
+    Piece("Lance-flammes", "gear", 250, {"puissance": 200, "poids": 40}),
+    Piece("Remorque", "gear", 80, {"resistance": 50, "poids": 20}),
+    Piece("la barbe de gandalf", "gear", 500, {"resistance": 1024, "poids": 8}, ["barbe"]),
+    Piece("joueur de lol main et pieds", "gear", 1000, {"puissance": 500, "vitesse": 500, "resistance": 500, "poids": 50}, ["lol"]),
+    Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
+    
+    # Divers
 ]
 
 
@@ -52,7 +94,7 @@ def creer_vehicule(modele, noms_pieces, nom=None):
 
 
 def kit_de_depart():
-    return [piece("Roue caoutchouc") for _ in range(4)] + [piece("Moteur banane"), piece("Châssis bois")]
+    return [piece("Roue caoutchouc") for _ in range(4)] + [piece("Moteur banane"), piece("Châssis bois"), piece("Sarbacane Papier")]
 
 
 # --- Adversaires -----------------------------------------------------------
