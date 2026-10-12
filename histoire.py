@@ -9,23 +9,24 @@ from donnees import adversaire
 from evenements import EvenementChoix, EvenementCombat, EvenementCommande
 
 INTRO = """
-Tu as 12 ans. Tes journées : canapé, chips, plafond.
-Un matin, tes parents posent un carton devant la porte. Dedans : quatre roues,
-un châssis en bois et… un moteur en forme de banane.
+Tu as 17 ans. Tes journées : Minecraft, pignouf, pignoufff.
+Un matin, tes parents te dégagent de la maison et te donnant 1 carton.
+4 roues, 1 moteur.
+Le chassis ? avec le carton. Une arme : Avec le papier journal.
+Tu a toujours rêvé de construire des véhicules. Tu n'a jamais réflechie a les faire rouler.
 « Tu veux manger ? Construis des trucs et vends-les. Bisous. »
-La porte se referme. Ton garage, c'est la cabane du jardin.
+La porte se referme. Ton garage, c'est dehors
 Objectif : GAGNER UN MAX DE THUNE.
 """
-
 
 def tronc_commun():
     return [
         EvenementChoix(
             "Dehors !",
-            "Tu regardes ton carton de pièces. Il est temps de choisir ta philosophie.",
+            "Tu regardes ton carton de pièces. Comment construire ton premier véhicules ?",
             [
-                ("Construire un truc qui va VITE.", {"reputation": {"A": 1}}),
-                ("Construire un truc qui fait MAL.", {"reputation": {"B": 1}}),
+                ("Construire un truc qui va VITE. Mais t'a pas de frein. tant pis c'est pas toi qui roulera avec", {"reputation": {"A": 1}}),
+                ("Construire un truc qui fait MAL. De toute facon il tapera pas sur toi.", {"reputation": {"B": 1}}),
                 ("Lire le manuel. Il y a un manuel ?", {"reputation": {"C": 1}}),
                 ("Demander du boulot au voisin louche.", {"reputation": {"D": 1}, "argent": 10,
                                                           "message": "Il te glisse 10 $ « pour plus tard »."}),
@@ -33,7 +34,7 @@ def tronc_commun():
         ),
         EvenementCommande(
             "Premier client",
-            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce que je conduis mal ».\n"
+            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce qu'elle conduis mal ».\n (ca se voyait a sa tête après...)\n",
             "Elle a l'air de beaucoup aimer les bananes.",
             Commande("Mamie Josette", "Une voiture solide pour aller au marché.", 60,
                      modele="Voiture", stats_min={"resistance": 30}, bonus_tags={"banane": 10},
@@ -43,28 +44,28 @@ def tronc_commun():
             "Le voisin louche",
             "Le voisin te tend un colis qui fait un léger bruit de glouglou.\n« Tu le livres à l'autre bout de la ville ? 30 $. »",
             [
-                ("Accepter sans poser de question.", {"reputation": {"D": 2}, "argent": 30}),
-                ("Demander si ça explose.", {"reputation": {"B": 2},
+                ("Accepter sans poser de question. Il te faut de l'argent.", {"reputation": {"D": 2}, "argent": 30}),
+                ("Demander si ça explose. Tu le donneras au autres.", {"reputation": {"B": 2},
                                               "message": "« Seulement si tu le secoues. » Intéressant."}),
-                ("Analyser le liquide d'abord.", {"reputation": {"C": 2},
+                ("Analyser le liquide d'abord. Qui sait ? Ca pourrait être un bon carburant.", {"reputation": {"C": 2},
                                                    "message": "C'est du jus de banane fermenté. Fascinant."}),
-                ("Le livrer en 4 minutes chrono.", {"reputation": {"A": 2}, "argent": 30}),
+                ("Le livrer en 4 minutes chrono. Top départ.", {"reputation": {"A": 2}, "argent": 30}),
             ],
         ),
         EvenementCombat(
             "Le caïd du quartier",
-            "Kévin, 13 ans, roi autoproclamé du quartier, bloque la sortie de ton garage.\n"
+            "Kévin, 17 ans, roi autoproclamé du quartier, bloque la sortie de ton garage.\n"
             "« Ici, on règle tout à l'arène. »",
             adversaire("kevin"), Arene("combat"),
         ),
         EvenementChoix(
             "La grande question",
-            "Kévin, vaincu, te demande en pleurant : « Mais tu veux devenir QUOI, au juste ? »",
+            "Kévin, vaincu, te pose une question très philosophique : « Mais tu veux devenir QUOI, au juste ? »",
             [
                 ("Le plus rapide de l'univers.", {"reputation": {"A": 3}}),
                 ("Le plus destructeur de l'univers.", {"reputation": {"B": 3}}),
                 ("Le plus savant de l'univers.", {"reputation": {"C": 3}}),
-                ("Le plus… discret de l'univers.", {"reputation": {"D": 3}}),
+                ("J'y ait pas réflechie.", {"reputation": {"D": 3}}),
             ],
         ),
     ]
@@ -80,8 +81,8 @@ def branche_a():
         EvenementCommande(
             "Pizza Turbo",
             "Luigi veut livrer ses pizzas encore chaudes… en Italie. Depuis ici.",
-            Commande("Luigi, pizzaïolo pressé", "Une voiture qui va très vite.", 180,
-                     modele="Voiture", stats_min={"vitesse": 60}, reputation={"A": 1}),
+            Commande("Luigi, pizzaïolo pressé", "Une voiture qui va très vite.", 220,
+                     modele="Voiture", stats_min={"vitesse": 120}, reputation={"A": 1}),
         ),
         EvenementCombat(
             "Le roi de la vitesse",
@@ -90,7 +91,7 @@ def branche_a():
         ),
         EvenementChoix(
             "Le mur du son",
-            "Tu viens de passer le mur du son. Derrière, un panneau :\n« Mur de la lumière — 3 km ».",
+            "T'a allumé ton moteur et avec tes conneries tout devient blanc.\nTu viens de passer le mur du son. Derrière, un panneau :\n« Mur de la lumière — 3 km ».",
             [
                 ("Accélérer.", {"message": "Évidemment."}),
                 ("Accélérer, mais en criant.", {"message": "Personne ne t'entend : tu vas trop vite."}),
@@ -103,6 +104,20 @@ def branche_a():
             Commande("Un physicien essoufflé", "Une voiture absurdement rapide.", 1000,
                      modele="Voiture", stats_min={"vitesse": 300}),
         ),
+        EvenementChoix(
+            "Une limite a la vitesse ?",
+            "Pour toi, aucune limite à la vitesse. Mais pour la physique, si. Tu viens de passer le mur de la lumière.\n",
+            [
+                ("Bah tu vois rien ducoup", {"message": "Évidemment."}),
+                ("Mais si tu vois,... de la lumière", {"message": "Enfin physyquement, tu vois rien. Mais tu est sur de voir de la lumière."}),
+                ("Prends des notes", {"argent": 100, "message": "Tu vendras ta recherche +100 $"}),
+            ],
+        ),
+        EvenementCombat(
+            "Le mur de la vitesse",
+            "Dans la lumière tu le vois descendre... devant toi il se tient, L'ultime MUR, Tu le défie sans hésiter",
+            adversaire("Arnaud"), Arene("course"),
+        )
     ]
 
 
@@ -124,6 +139,20 @@ def branche_b():
             "La Moissonneuse de l'Apocalypse",
             "Un fermier a construit une moissonneuse de 40 tonnes. Survis-lui.",
             adversaire("moissonneuse"), Arene("endurance"),
+        ),
+        EvenementChoix(
+            "Que'est-ce que la puissance ?",
+            "Tu as beaucoup de puissance. Mais qu'est-ce que la puissance ?",
+            [
+                ("La puissance, c'est la puissance.", {"message": "Évidemment."}),
+                ("Mais t'est pas philosophe, tu tape sur des gens, pas des poisons.", {"message": "Ouais pas besoin de réflechir."}),
+                ("La puissance c'est pour protéger,... TA THUNE.", {"argent": 100, "message": "Votre patrimoine vous rapporte +100 $"}),
+            ]
+        ),
+        EvenementCombat(
+            "Toujours plus fort que soit",
+            "C'est faux et tu vas le prouver",
+            adversaire("Bezard"), Arene("combat"),
         ),
         EvenementChoix(
             "Le bouton rouge",
@@ -157,10 +186,25 @@ def branche_c():
         ),
         EvenementCommande(
             "L'agence spatiale",
-            "Une agence spatiale (pas la NASA, la NASA-B) veut un avion assez puissant pour quitter l'atmosphère.",
+            "Une agence spatiale (pas la NASA, la NASB) veut un avion assez puissant pour quitter l'atmosphère.",
             Commande("Agence spatiale NASA-B", "Un avion qui va dans l'espace.", 1500,
                      modele="Avion", stats_min={"puissance": 1000}),
         ),
+        EvenementChoix(
+            "L'espace",
+            "Tu as quitté l'atmosphère. Tu es dans l'espace. Il n'y a pas de gravité. Il n'y a pas d'air. Il n'y a que toi. \n Attends ... Il n'y a aucun concurrent, OUVRE TON GARAGE SPATIAL !",
+            [
+                ("Choisir la lune.", {"message": "Mais ou a tu la tete ?"}),
+                ("L'espace entier", {"message": "Tu as raison, l'espace est grand."}),
+                ("Mars c'est bien.", {"message": "Fera un peu chaud. Et froid."}),
+                ("Pourquoi se limiter a une galaxie ?", {"message": "L'espace sera a toi"}),
+            ],
+        ),
+        EvenementCombat(
+            "Apres espace",
+            "L'espace, les dimensions, tu comprends pas trop tout ca. Mais tu vas devoir utiliser tes 2 neurones au garrot pour prouver a la NASB que l'espace t'appartiens",
+            adversaire("Prof Raoult"), Arene("combat"),
+        )
     ]
 
 
