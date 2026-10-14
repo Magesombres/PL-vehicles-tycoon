@@ -169,10 +169,6 @@ def adversaire(cle):
             "LE bouc à Bezard",
             creer_vehicule("bouc", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
             11, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
-        "Prof Raoult": lambda: Adversaire(
-            "Professeur Raoult",
-            creer_vehicule("avion", ["Moteur fusée", "Ailes alu", "Coque titane"], "La Fusée Douteuse"),
-            9, 42000000, "La réponse est 42. La question, j'ai oublié."),
         "smegma": lambda: Adversaire(
             "LA smeg-moblie",
             creer_vehicule("voiture", ["smeg-roue"*4, "le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
