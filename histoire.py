@@ -181,7 +181,7 @@ def branche_c():
             [
                 ("Pour la science !", {"argent": 150, "message": "Tu découvres le boson de banane. Prime : 150 $."}),
                 ("Écrire un article dessus.", {"argent": 80, "message": "Publié dans « Nature (des fruits) ». +80 $"}),
-                ("Manger la banane.", {"message": "Elle avait un goût de neutrino."}),
+                ("Manger la banane.", {"message": "Elle avait un goût de neutrino. Pas très bon a mon avis."}),
             ],
         ),
         EvenementCommande(
