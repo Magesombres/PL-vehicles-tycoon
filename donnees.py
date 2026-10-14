@@ -16,7 +16,8 @@ MODELES = {
     "roller": Modele("Roller", ["moteur", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "chassis"]),
     "velo dit 'vin'": Modele("Vélo dit 'vin'", ["moteur", "roue", "roue", "chassis", "gear", "gear"]),
     "trottinette": Modele("Trottinette", ["roue", "roue", "moteur"]),
-    "bouc": Modele("Le bouc à Bezard", ["chassis", "chassis", "gear", "gear", "gear", "gear", "gear", "gear"]),
+    "bouc": Modele("Le bouc à Bezard", ["chassis", "chassis", "roue", "roue", "roue", "roue", "gear", "gear"]),
+    
 }
 
 CATALOGUE = [
@@ -43,6 +44,11 @@ CATALOGUE = [
     Piece("les petites roues", "roue", 5, {"vitesse": 3, "resistance": 1, "poids": 1}, ["petit"]),
     Piece("roue arriere de l'avant", "roue", 250, {"vitesse": 500, "resistance": 1000, "poids": 2}, ["arriere"]),
     Piece("roue arriere de l'arriere", "roue", 250, {"vitesse": 1000, "resistance": 500, "poids": 2}, ["arriere"]),
+    Piece("rn"),
+    Piece("lfi"),
+    Piece("ecologiste les vert"),
+    Piece("en marche"),
+    Piece("roue du destin"),
     
     # Châssis
     Piece("Châssis bois", "chassis", 15, {"resistance": 20, "poids": 10}),
@@ -177,7 +183,7 @@ def adversaire(cle):
             11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
         "Professeur Raoult": lambda: Adversaire(
             "Covid-truck",
-            creer_vehicule("dépiste-mobile", ["moteur confiné","roue du destin"*4,"chassis médical","raconter n'importe quoi","le test pcr"], "doc de wish"),
+            creer_vehicule("voiture", ["roue du destin"*4,"moteur confiné","chassis médical"],"raconter n'importe quoi","le test pcr", "doc de wish"),
             11, 7100000, "l'Hydroxychloroquine c'est bien"),
     }
     return fabriques[cle]()
