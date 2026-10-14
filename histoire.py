@@ -34,11 +34,10 @@ def tronc_commun():
         ),
         EvenementCommande(
             "Premier client",
-            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce qu'elle conduis mal ».\n (ca se voyait a sa tête après...)\n",
+            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce qu'elle conduit mal ».\n (ça se voyait à sa tête après...)\n"
             "Elle a l'air de beaucoup aimer les bananes.",
             Commande("Mamie Josette", "Une voiture solide pour aller au marché.", 60,
-                     modele="Voiture", stats_min={"resistance": 30}, bonus_tags={"banane": 10},
-                     reputation={"C": 1}),
+                    modele="Voiture", stats_min={"resistance": 30}, bonus_tags={"banane": 10}, reputation={"C": 1}),
         ),
         EvenementChoix(
             "Le voisin louche",
