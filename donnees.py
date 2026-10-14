@@ -163,8 +163,8 @@ def adversaire(cle):
             11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
         "Professeur Raoult": lambda: Adversaire(
             "Covid-truck",
-            creer_vehicule("costard-cravate", ["la force du titan","transport de poubelles enflammées","retenir les foules"], "les rots du peuples"),
-            11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
+            creer_vehicule("dépiste-mobile", ["moteur confiné","roue du destin"*4,"chassis médical","raconter n'importe quoi","le test pcr], "doc de wish"),
+            11, 7100000, "l'Hydroxychloroquine c'est bien"),
     }
     return fabriques[cle]()
 
