@@ -161,8 +161,8 @@ def adversaire(cle):
             "La blocus-mobile",
             creer_vehicule("costard-cravate", ["la force du titan","transport de poubelles enflammées","retenir les foules"], "les rots du peuples"),
             11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
-        "Bally Bagayoko": lambda: Adversaire(
-            "La blocus-mobile",
+        "Professeur Raoult": lambda: Adversaire(
+            "Covid-truck",
             creer_vehicule("costard-cravate", ["la force du titan","transport de poubelles enflammées","retenir les foules"], "les rots du peuples"),
             11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
     }
