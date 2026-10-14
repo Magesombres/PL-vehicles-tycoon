@@ -14,7 +14,9 @@ MODELES = {
     "cyclo-moteur": Modele("Cyclo-moteur", ["moteur", "roue", "roue", "chassis"]),
     "33 tonnes": Modele("33 tonnes", ["moteur", "roue", "roue", "roue", "roue", "chassis"]),
     "roller": Modele("Roller", ["moteur", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "chassis"]),
-    "velo dit 'vin'": Modele("Vélo dit 'vin'", ["Moteur", "roue", "roue", "chassis", "gear", "gear"]),
+    "velo dit 'vin'": Modele("Vélo dit 'vin'", ["moteur", "roue", "roue", "chassis", "gear", "gear"]),
+    "trottinette": Modele("Trottinette", ["roue", "roue", "moteur"]),
+    "bouc": Modele("Le bouc à Bezard", ["chassis", "chassis", "gear", "gear", "gear", "gear", "gear", "gear"]),
 }
 
 CATALOGUE = [
@@ -39,8 +41,8 @@ CATALOGUE = [
     Piece("pneu carrée", "roue", 20, {"vitesse": 5, "resistance": 5, "poids": 3}, ["carré"]),
     Piece("Chenille (l'animal)", "roue", 15, {"vitesse": 2, "resistance": 10, "poids": 5}, ["chenille"]),
     Piece("les petites roues", "roue", 5, {"vitesse": 3, "resistance": 1, "poids": 1}, ["petit"]),
-    Piece("roue arriere de l'avant ", "roue", 250, {"vitesse": 500, "resistance": 1000, "poids": 2}, ["arriere"]),
-    Piece("roue arriere de l'arriere ", "roue", 250, {"vitesse": 1000, "resistance": 500, "poids": 2}, ["arriere"]),
+    Piece("roue arriere de l'avant", "roue", 250, {"vitesse": 500, "resistance": 1000, "poids": 2}, ["arriere"]),
+    Piece("roue arriere de l'arriere", "roue", 250, {"vitesse": 1000, "resistance": 500, "poids": 2}, ["arriere"]),
     
     # Châssis
     Piece("Châssis bois", "chassis", 15, {"resistance": 20, "poids": 10}),
@@ -74,7 +76,15 @@ CATALOGUE = [
     Piece("joueur de lol main et pieds", "gear", 1000, {"puissance": 500, "vitesse": 500, "resistance": 500, "poids": 50}, ["lol"]),
     Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
     
-    # Divers
+    # Divers (Bezard)
+    Piece("la calvitie du démon", "chassis", 50, {"resistance": 40, "poids": 0}, ["demon"]),
+    Piece("le bus de Staline", "chassis", 300, {"resistance": 300, "poids": 150}),
+    Piece("lfi", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("rn", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("ecologiste les vert", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("en marche", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("barbe rousse", "gear", 40, {"resistance": 15, "poids": 3}),
+    Piece("le communisme", "gear", 500, {"puissance": 300, "resistance": 100, "poids": 20}),
 ]
 
 
@@ -107,7 +117,7 @@ def adversaire(cle):
             1, 40, "Ma banane est plus jaune que la tienne."),
         "mamie_turbo": lambda: Adversaire(
             "Mamie Turbo",
-            creer_vehicule("voiture", ["Roue caoutchouc"] * 4 + ["Moteur de tondeuse", "Châssis bois"], "La Twingo de l'enfer"),
+            creer_vehicule("voiture", ["Roue caoutchouc"] * 4 + ["Moteur de tondeuse a cheveux", "Châssis bois"], "La Twingo de l'enfer"),
             2, 70, "De mon temps, on gagnait à pied !"),
         "robot": lambda: Adversaire(
             "Robot aspirateur rebelle",
@@ -147,12 +157,16 @@ def adversaire(cle):
             8, 587, "Avec le linge les cours et les repas j'ai quand même le temps de te battre"),
         "Arnaud": lambda: Adversaire(
             "Le vélo sacré de Mr Arnaud",
-            creer_vehicule("velo dit 'vin'", ["les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout"),
+            creer_vehicule("velo dit 'vin'", ["Les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "Le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout"),
             11, 10000000, "C'est normal que ca marche pas ça à pas de pieds"),
         "Bezard": lambda: Adversaire(
             "LE bouc à Bezard",
-            creer_vehicule("'j'suis,pas s'agitaire j'suis bélier'", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
+            creer_vehicule("bouc", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
             11, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
+        "Prof Raoult": lambda: Adversaire(
+            "Professeur Raoult",
+            creer_vehicule("avion", ["Moteur fusée", "Ailes alu", "Coque titane"], "La Fusée Douteuse"),
+            9, 42000000, "La réponse est 42. La question, j'ai oublié."),
         "smegma": lambda: Adversaire(
             "LA smeg-moblie",
             creer_vehicule("voiture", ["smeg-roue"*4, "le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
