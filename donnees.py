@@ -185,6 +185,10 @@ def adversaire(cle):
             "rapido-man",
             creer_vehicule("roller", ["Moteur de tondeuse a cheveux","Roller"*6,"Châssis carton"], "roulette-rider"),
             1, 20, "La justice arrive sur des petites roues"),
+        "ingénium": lambda: Adversaire(
+            "tenia ida",
+            creer_vehicule("roller", ["Moteur V8","Roue caoutchouc"*6,"Châssis acier"], "Le délégay des héros"),
+            3, 140, "Ingenium. C'est le nom du héros qui va te vaincre !"),
         
     }
     return fabriques[cle]()
