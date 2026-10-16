@@ -189,6 +189,10 @@ def adversaire(cle):
             "tenia ida",
             creer_vehicule("roller", ["Moteur V8","Roue caoutchouc"*6,"Châssis acier"], "Le délégay des héros"),
             3, 140, "Ingenium. C'est le nom du héros qui va te vaincre !"),
+        "sonic": lambda: Adversaire(
+            "le hérisson bleu",
+            creer_vehicule("trottinette", ["Roue en or","pneu carrée","Moteur F1"], "Blue trot"),
+            5, 500, "Faut que je speed!!!"),
         
     }
     return fabriques[cle]()
