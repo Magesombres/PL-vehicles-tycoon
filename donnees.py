@@ -181,6 +181,11 @@ def adversaire(cle):
             "Covid-truck",
             creer_vehicule("voiture", ["roue du destin"*4,"moteur confiné","chassis médical"],"raconter n'importe quoi","le test pcr", "doc de wish"),
             11, 7100000, "l'Hydroxychloroquine c'est bien"),
+        "rapido-man": lambda: Adversaire(
+            "rapido-man",
+            creer_vehicule("roller", ["Moteur de tondeuse a cheveux","Roller"*6,"Châssis carton"], "roulette-rider"),
+            1, 20, "La justice arrive sur des petites roues"),
+        
     }
     return fabriques[cle]()
 
