@@ -102,8 +102,11 @@ def piece(nom):
     raise KeyError(nom)
 
 
-def creer_vehicule(modele, noms_pieces, nom=None):
-    vehicule = Vehicule(MODELES[modele], nom)
+def creer_vehicule(modele, noms_pieces, nom=None, nb_gear=0):
+    """nb_gear : emplacements "gear" ajoutés en plus de ceux du modèle (optionnel, variable selon le véhicule)."""
+    base = MODELES[modele]
+    emplacements = list(base.emplacements) + ["gear"] * nb_gear
+    vehicule = Vehicule(Modele(base.nom, emplacements), nom)
     for nom_piece in noms_pieces:
         vehicule.poser(piece(nom_piece))
     return vehicule
@@ -163,11 +166,11 @@ def adversaire(cle):
             8, 587, "Avec le linge les cours et les repas j'ai quand même le temps de te battre"),
         "Arnaud": lambda: Adversaire(
             "Le vélo sacré de Mr Arnaud",
-            creer_vehicule("velo dit 'vin'", ["Les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "Le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout"),
+            creer_vehicule("velo dit 'vin'", ["Les gambettes du démon", "roue arriere de l'avant","roue arriere de l'arriere", "Le chat sept","la barbe de gandalf","joueur de lol main et pieds"], "c'est mon destrier c'est tout", nb_gear=2),
             11, 10000000, "C'est normal que ca marche pas ça à pas de pieds"),
         "Bezard": lambda: Adversaire(
             "LE bouc à Bezard",
-            creer_vehicule("bouc", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
+            creer_vehicule("bouc", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal", nb_gear=6),
             11, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
         "smegma": lambda: Adversaire(
             "LA smeg-moblie",
