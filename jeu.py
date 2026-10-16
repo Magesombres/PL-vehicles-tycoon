@@ -2,6 +2,7 @@
 
 from collections import Counter
 
+import competences
 import donnees
 import histoire
 from arene import Arene
@@ -157,13 +158,29 @@ class Jeu:
     def boutique(self):
         while True:
             titre(f"BOUTIQUE  —  Thune : {self.joueur.argent} $")
-            for i, p in enumerate(donnees.CATALOGUE, 1):
-                print(f"{i:>2}. {p.prix:>4} $  {p}")
+            types = []
+            for p in donnees.CATALOGUE:
+                if p.emplacement not in types:
+                    types.append(p.emplacement)
+            for i, emplacement in enumerate(types, 1):
+                print(f"{i}. {emplacement}")
             print(" 0. Retour")
-            choix = demander_nombre(0, len(donnees.CATALOGUE))
+            choix = demander_nombre(0, len(types))
             if choix == 0:
                 return
-            modele_piece = donnees.CATALOGUE[choix - 1]
+            self.boutique_rayon(types[choix - 1])
+
+    def boutique_rayon(self, emplacement):
+        pieces = [p for p in donnees.CATALOGUE if p.emplacement == emplacement]
+        while True:
+            titre(f"BOUTIQUE — {emplacement}  —  Thune : {self.joueur.argent} $")
+            for i, p in enumerate(pieces, 1):
+                print(f"{i:>2}. {p.prix:>4} $  {p}")
+            print(" 0. Retour")
+            choix = demander_nombre(0, len(pieces))
+            if choix == 0:
+                return
+            modele_piece = pieces[choix - 1]
             if modele_piece.prix > self.joueur.argent:
                 print("Pas assez de thune !")
                 continue
@@ -174,8 +191,11 @@ class Jeu:
     # --- Commandes ---------------------------------------------------------------
 
     def completer_commandes(self):
+        limite = NB_COMMANDES_LIBRES
+        if competences.a_la_competence(self.joueur.vehicule, "remorque"):
+            limite += 1
         libres = [c for c in self.commandes if c is not self.commande_histoire]
-        for _ in range(NB_COMMANDES_LIBRES - len(libres)):
+        for _ in range(limite - len(libres)):
             self.commandes.append(donnees.commande_aleatoire())
 
     def menu_commandes(self):
@@ -202,7 +222,11 @@ class Jeu:
         self.joueur.argent += gain
         self.joueur.retirer_vehicule(vehicule)
         self.commandes.remove(commande)
-        self.appliquer_effets({"reputation": commande.reputation})
+        reputation = commande.reputation
+        if competences.a_la_competence(vehicule, "lol"):
+            reputation = {branche: points * 2 for branche, points in reputation.items()}
+            print("Compétence LOL : réputation doublée !")
+        self.appliquer_effets({"reputation": reputation})
         print(f"{commande.client} est ravi(e) ! +{gain} $")
         if commande is self.commande_histoire:
             self.commande_histoire = None
@@ -219,8 +243,11 @@ class Jeu:
         formats = list(Arene.FORMATS)
         for i, cle in enumerate(formats, 1):
             infos = Arene.FORMATS[cle]
-            boost = ", ".join(f"{stat} x{mult}" for stat, mult in infos["boost"].items())
-            print(f"{i}. {infos['nom']} ({boost}) — {infos['victoire']}")
+            if infos["boost"]:
+                detail = ", ".join(f"{stat} x{mult}" for stat, mult in infos["boost"].items())
+            else:
+                detail = "règle surprise tirée au sort"
+            print(f"{i}. {infos['nom']} ({detail}) — {infos['victoire']}")
         print("0. Retour")
         choix = demander_nombre(0, len(formats))
         if choix == 0:
