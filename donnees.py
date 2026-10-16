@@ -209,6 +209,13 @@ def adversaire(cle):
             "Le boucher de Bagdad",
             creer_vehicule("33 tonnes", ["Roue en or"*4,"Moteur de fusée","Coque Rhinoshield"], "vrouum vrouum"),
             10, 1000, " Katchaoww"),
+
+
+        #Boss finale secréte
+        "Vénère julien": lambda: Adversaire(
+            "S'est fait N**é a la MDL",
+            creer_vehicule("MDL", ["moteur 67D", "chenilles Max"*2, "armature en Lonsdaléite", "Heart of the machine", "Divinité Suprême", "MDL suprême", "Infinité", "Grand chef suprême"], "La MDL de la mort qui tue", nb_gear=3),
+        ),
         
     }
     return fabriques[cle]()
