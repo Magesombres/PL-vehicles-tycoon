@@ -17,6 +17,7 @@ MODELES = {
     "velo dit 'vin'": Modele("Vélo dit 'vin'", ["moteur", "roue", "roue", "chassis", "gear", "gear"]),
     "trottinette": Modele("Trottinette", ["roue", "roue", "moteur"]),
     "bouc": Modele("Le bouc à Bezard", ["chassis", "chassis", "roue", "roue", "roue", "roue", "gear", "gear"]),
+    "MDL": Model("moteur", "roue", "chassis", "core", "Divinity"]),
     
 }
 
@@ -33,6 +34,7 @@ CATALOGUE = [
     Piece("Petit mais puissant", "moteur", 50, {"puissance": 20, "vitesse": 25, "poids": 10}),
     Piece("Mot 'teur'", "moteur", 70, {"puissance": 25, "vitesse": 30, "poids": 15}),
     Piece("Les gambettes du démon", "moteur", 999, {"puissance": 800, "vitesse": 666, "poids": 10}, ["demon"]),
+    Piece("moteur 67D", "moteur", 6700, {"puissance": 6767, "vitesse": 6969, "poids": 76}, ["Boss finale"]),
     # Roues
     Piece("Roue caoutchouc", "roue", 10, {"vitesse": 5, "resistance": 5, "poids": 2}),
     Piece("Roue bambou", "roue", 4, {"vitesse": 8, "resistance": 1}),
@@ -49,6 +51,7 @@ CATALOGUE = [
     Piece("ecologiste les vert"),
     Piece("en marche"),
     Piece("roue du destin"),
+    Piece("chenilles Max", "roue", 999999, {"vitesse": 10000, "resistance": 5000, "poids":-7}
     
     # Châssis
     Piece("Châssis bois", "chassis", 15, {"resistance": 20, "poids": 10}),
@@ -58,6 +61,7 @@ CATALOGUE = [
     Piece("chasse des scies", "chassis", 100, {"resistance": 50, "poids": 20}, ["scie"]),
     Piece("Sacré châssis", "chassis", 500, {"resistance": 500, "poids": 200}, ["sacré"]),
     Piece("Le chat sept", "chassis", 300, {"resistance": 666, "poids": 150}, ["chat"]),
+    Piece("armature en Lonsdaléite", 9999999999, {"resistance": 9999, "poids":999},
     # Bateaux et avions
     Piece("Coque gonflable", "coque", 20, {"resistance": 15, "vitesse": 5, "poids": 3}),
     Piece("Coque titane", "coque", 150, {"resistance": 100, "poids": 40}),
@@ -82,7 +86,7 @@ CATALOGUE = [
     Piece("joueur de lol main et pieds", "gear", 1000, {"puissance": 500, "vitesse": 500, "resistance": 500, "poids": 50}, ["lol"]),
     Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
     
-    # Divers (Bezard)
+    # Divers (Boss)
     Piece("la calvitie du démon", "chassis", 50, {"resistance": 40, "poids": 0}, ["demon"]),
     Piece("le bus de Staline", "chassis", 300, {"resistance": 300, "poids": 150}),
     Piece("lfi", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
@@ -91,6 +95,8 @@ CATALOGUE = [
     Piece("en marche", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
     Piece("barbe rousse", "gear", 40, {"resistance": 15, "poids": 3}),
     Piece("le communisme", "gear", 500, {"puissance": 300, "resistance": 100, "poids": 20}),
+    Piece("Heart of the machine", "core", 99999999, {"puissance": 12345, "resistance": 10000})
+    Piece("Divinité Suprême", "Divinity", 99999999, {"vitesse": 25600, "puissance": 25600, "resistance": 25600)
 ]
 
 
