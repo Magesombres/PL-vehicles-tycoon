@@ -85,6 +85,9 @@ CATALOGUE = [
     Piece("la barbe de gandalf", "gear", 500, {"resistance": 1024, "poids": 8}, ["barbe"]),
     Piece("joueur de lol main et pieds", "gear", 1000, {"puissance": 500, "vitesse": 500, "resistance": 500, "poids": 50}, ["lol"]),
     Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
+    Piece("MDL suprême", "gear", 9999999, {"puissance": 1000, "vitesse": 5678, "poids": 11, ["MDL"]),
+    Piece("Grand chef suprême", "gear", 99999, {"puissance": 999, "vitesse": 6234, ["GCS"]),
+    Piece("Divinité", "gear", 999999, {"puissance": 99999, "vitesse": 623994, ["DIVIN"])
     
     # Divers (Boss)
     Piece("la calvitie du démon", "chassis", 50, {"resistance": 40, "poids": 0}, ["demon"]),
