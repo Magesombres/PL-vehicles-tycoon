@@ -2,6 +2,8 @@
 
 import random
 
+import competences
+
 ACTIONS = {"1": "attaquer", "2": "foncer", "3": "proteger"}
 
 
@@ -15,7 +17,9 @@ class Pilote:
         self.stats_combat = {}
         self.pv = 0
         self.distance = 0
-        self.protege = False
+        self.protection = 1  # diviseur des dégâts subis (1 = aucune protection)
+        self.brulure = 0  # dégâts qui retombent automatiquement chaque tour
+        self.capacite_utilisee = False  # pour les capacités à usage unique par combat
 
     def preparer_combat(self, multiplicateurs):
         stats = self.vehicule.calculer_stats()
@@ -24,15 +28,25 @@ class Pilote:
         self.stats_combat = stats
         self.pv = stats["resistance"]
         self.distance = 0
-        self.protege = False
+        self.protection = 1
+        self.brulure = 0
+        self.capacite_utilisee = False
 
     def choisir_action(self, cible, arene):
         """Redéfinie dans Joueur (clavier) et Adversaire (IA)."""
         raise NotImplementedError
 
-    def subir(self, degats):
-        if self.protege:
-            degats //= 2
+    def capacite_disponible(self):
+        tag, piece, info = competences.capacite_combat(self.vehicule)
+        if info is None:
+            return None
+        if info["limite"] and self.capacite_utilisee:
+            return None
+        return tag, piece, info
+
+    def subir(self, degats, ignorer_protection=False):
+        if not ignorer_protection:
+            degats //= self.protection
         degats = max(1, degats)
         self.pv = max(0, self.pv - degats)
         return degats
@@ -55,11 +69,17 @@ class Joueur(Pilote):
         self.reputation = {"A": 0, "B": 0, "C": 0, "D": 0}  # cachée au joueur
 
     def choisir_action(self, cible, arene):
-        print("1. Attaquer   2. Foncer   3. Se protéger")
+        capacite = self.capacite_disponible()
+        invite = "1. Attaquer   2. Foncer   3. Se protéger"
+        if capacite:
+            invite += f"   4. {capacite[2]['nom']}"
+        print(invite)
         while True:
             choix = input("> ").strip()
             if choix in ACTIONS:
                 return ACTIONS[choix]
+            if choix == "4" and capacite:
+                return "capacite"
             print("Choix invalide.")
 
     def retirer_vehicule(self, vehicule):
@@ -76,7 +96,9 @@ class Adversaire(Pilote):
         self.replique = replique
 
     def choisir_action(self, cible, arene):
-        # Règle simple : se protège quand il est mal en point, sinon joue selon le format
+        # Règle simple : utilise sa capacité si dispo, se protège si mal en point, sinon selon le format
+        if self.capacite_disponible() and random.random() < 0.4:
+            return "capacite"
         if self.pv < self.stats_combat["resistance"] * 0.3 and random.random() < 0.5:
             return "proteger"
         if arene.format == "course":
