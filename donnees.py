@@ -205,6 +205,10 @@ def adversaire(cle):
             "le rookie",
             creer_vehicule("voiture", ["Roue en or"*4,"Moteur de fusée","Coque Rhinoshield"], "vrouum vrouum"),
             10, 1000, " Katchaoww"),
+        "Saddam Hussein Al-Majid": lambda: Adversaire(
+            "Le boucher de Bagdad",
+            creer_vehicule("33 tonnes", ["Roue en or"*4,"Moteur de fusée","Coque Rhinoshield"], "vrouum vrouum"),
+            10, 1000, " Katchaoww"),
         
     }
     return fabriques[cle]()
