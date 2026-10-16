@@ -65,7 +65,7 @@ CATALOGUE = [
     Piece("Ailes en papier", "ailes", 8, {"vitesse": 25, "resistance": 1}, ["papier"]),
     Piece("Ailes alu", "ailes", 80, {"vitesse": 60, "resistance": 20, "poids": 15}),
     Piece("Aile de poulet", "ailes", 5, {"vitesse": 10, "resistance": 1}, ["poulet"]),
-    Piece("La coke", "ailes", 100, {"vitesse": 100, "resistance": 50, "poids": 20}, ["coke"]),
+    Piece("La coke", "coque", 100, {"vitesse": 100, "resistance": 50, "poids": 20}, ["coke"]),
 
     # Armatures
     Piece("Armature en bois", "armature", 10, {"resistance": 15, "poids": 5}),
@@ -193,6 +193,14 @@ def adversaire(cle):
             "le hérisson bleu",
             creer_vehicule("trottinette", ["Roue en or","pneu carrée","Moteur F1"], "Blue trot"),
             5, 500, "Faut que je speed!!!"),
+        "Flash": lambda: Adversaire(
+            "L'éclair rouge",
+            creer_vehicule("bateau", ["Moteur fusée","Coque titane","Poste de pilotage basique"], "Flaship"),
+            9, 900, " Je m'appelle Barry Allen et je suis l'homme le plus rapide du monde !"),
+         "Usain Bolt": lambda: Adversaire(
+            "L'éclair noir",
+            creer_vehicule("avion", ["Moteur d'avion de chasse","Aile de poulet","Coque titane"], "La menace noire"),
+            7, 700, " Wakanda Foreeeeeeveeeeeeeer !"),
         
     }
     return fabriques[cle]()
