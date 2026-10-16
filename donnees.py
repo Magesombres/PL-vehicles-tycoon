@@ -95,7 +95,7 @@ CATALOGUE = [
     Piece("en marche", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
     Piece("barbe rousse", "gear", 40, {"resistance": 15, "poids": 3}),
     Piece("le communisme", "gear", 500, {"puissance": 300, "resistance": 100, "poids": 20}),
-    Piece("Heart of the machine", "core", 99999999, {"puissance": 12345, "resistance": 10000})
+    Piece("Heart of the machine", "core", 99999999, {"puissance": 12345, "resistance": 10000}),
     Piece("Divinité Suprême", "Divinity", 99999999, {"vitesse": 25600, "puissance": 25600, "resistance": 25600)
 ]
 
