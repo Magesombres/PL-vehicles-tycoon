@@ -1,51 +1,48 @@
-vitesse
-1:
-2: mamie turbo
-3:
-4:speedy
-5:
-6: julien
-7:
-8: crombez
-9:
-10:
-boss: arnaud
+tronc commun (toutes les runs)
+1: dehors ! (choix)
+2: mamie josette (commande)
+3: le voisin louche (choix)
+4: kévin (combat)
+5: la grande question (choix) -> la réputation choisit la branche
 
-résistance :
-1:
-2:
-3: lisa
-4: gérard
-5: moissonneuse
-6:
-7:
-8:
-9:
-10:
-boss : bezard
+vitesse (A — T1)
+1: luigi (commande)
+2: speedy (course)
+3: julien (course)
+4: le mur du son (choix)
+5: le physicien (commande)
+6: crombez (combat)
+7: une limite à la vitesse ? (choix)
+boss: arnaud (course)
 
-science : 
-1:
-2:
-3: robot
-4:
-5:
-6:
-7:
-8:
-9:
-10:
-boss: proffesseur raoult
+résistance (B — Du sang !)
+1: lisa (combat)
+2: gérard (combat)
+3: général patate (commande)
+4: moissonneuse (endurance)
+5: qu'est-ce que la puissance ? (choix)
+boss : bezard (combat)
+après le boss : le bouton rouge (choix)
 
-transport douteux:
-1: kévin
-2: etham
-3:
-4:
-5: douane
-6:
-7: smegma
-8:
-9:
-10:
-boss: bally bagayoko
+science (C)
+1: professeure tournesol (commande)
+2: robot (combat)
+3: l'expérience (choix)
+4: la NASB (commande)
+5: l'espace (choix)
+boss: professeur raoult (combat)
+
+transport douteux (D — Livraison)
+1: etham (course)
+2: monsieur x (commande)
+3: le colis qui fait tic-tac (choix)
+4: douane (course)
+5: smegma (combat)
+boss: bally bagayoko (combat)
+
+boss final secret (après les 4 fins)
+1: la MDL (choix)
+boss: vénère julien (combat) -> pièce ultime : Divinité
+
+arène libre (par niveau)
+rapido-man, kévin, mamie turbo, robot, ingénium, gérard, sonic, flash, usain bolt, flash mcqueen, saddam

@@ -10,17 +10,20 @@ MODELES = {
     "voiture": Modele("Voiture", ["roue", "roue", "roue", "roue", "moteur", "chassis"]),
     "bateau": Modele("Bateau", ["moteur", "coque", "poste de pilotage"]),
     "avion": Modele("Avion", ["moteur", "ailes", "coque"]),
-    "velo": Modele("velo", ["roue", "roue", "armature"]),
+    "velo": Modele("Vélo", ["roue", "roue", "armature"]),
     "cyclo-moteur": Modele("Cyclo-moteur", ["moteur", "roue", "roue", "chassis"]),
     "33 tonnes": Modele("33 tonnes", ["moteur", "roue", "roue", "roue", "roue", "chassis"]),
-    "roller": Modele("Roller", ["moteur", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "roller", "chassis"]),
+    "roller": Modele("Roller", ["moteur", "roue", "roue", "roue", "roue", "roue", "roue", "roue", "roue", "chassis"]),
     "velo dit 'vin'": Modele("Vélo dit 'vin'", ["moteur", "roue", "roue", "chassis", "gear", "gear"]),
     "trottinette": Modele("Trottinette", ["roue", "roue", "moteur"]),
     "bouc": Modele("Le bouc à Bezard", ["chassis", "chassis", "roue", "roue", "roue", "roue", "gear", "gear"]),
-    "MDL": Model("moteur", "roue", "chassis", "core", "Divinity"]),
-    
+    "MDL": Modele("MDL", ["moteur", "roue", "roue", "chassis", "core", "Divinity", "gear", "gear", "gear"]),
+    "treu-treu": Modele("Treu-treu", ["moteur", "ailes", "coque"]),
+    "costard-cravate": Modele("Costard-cravate", ["moteur", "chassis", "gear"]),
+    "covid-truck": Modele("Covid-truck", ["roue", "roue", "roue", "roue", "moteur", "chassis", "gear", "gear", "gear"]),
 }
 
+# Pièces vendues à la boutique
 CATALOGUE = [
     # Moteurs
     Piece("Moteur banane", "moteur", 5, {"puissance": 2, "vitesse": 5, "poids": 1}, ["banane"]),
@@ -28,31 +31,23 @@ CATALOGUE = [
     Piece("Moteur V8", "moteur", 80, {"puissance": 30, "vitesse": 30, "poids": 15}),
     Piece("Moteur V12", "moteur", 100, {"puissance": 40, "vitesse": 40, "poids": 20}),
     Piece("Moteur F1", "moteur", 200, {"puissance": 100, "vitesse": 100, "poids": 50}),
-    Piece("Moteur fusée", "moteur", 600, {"puissance": 2000, "vitesse": 500, "poids": 400}, ["fusee"]),
-    Piece("Moteur de trotinette", "moteur", 20, {"puissance": 10, "vitesse": 15, "poids": 5}),
+    Piece("Moteur fusée", "moteur", 1500, {"puissance": 2000, "vitesse": 500, "poids": 400}, ["fusee"]),
+    Piece("Moteur de trottinette", "moteur", 20, {"puissance": 10, "vitesse": 15, "poids": 5}),
     Piece("Moteur d'avion de chasse", "moteur", 300, {"puissance": 200, "vitesse": 200, "poids": 100}),
     Piece("Petit mais puissant", "moteur", 50, {"puissance": 20, "vitesse": 25, "poids": 10}),
     Piece("Mot 'teur'", "moteur", 70, {"puissance": 25, "vitesse": 30, "poids": 15}),
-    Piece("Les gambettes du démon", "moteur", 999, {"puissance": 800, "vitesse": 666, "poids": 10}, ["demon"]),
-    Piece("moteur 67D", "moteur", 6700, {"puissance": 6767, "vitesse": 6969, "poids": 76}, ["Boss finale"]),
+    Piece("le smeg-moteur", "moteur", 250, {"puissance": 150, "vitesse": 150, "poids": 60}, ["smeg"]),
     # Roues
     Piece("Roue caoutchouc", "roue", 10, {"vitesse": 5, "resistance": 5, "poids": 2}),
     Piece("Roue bambou", "roue", 4, {"vitesse": 8, "resistance": 1}),
     Piece("Chenilles", "roue", 40, {"vitesse": 1, "resistance": 25, "poids": 10}, ["chenilles"]),
     Piece("Roue en or", "roue", 100, {"vitesse": 20, "resistance": 10, "poids": 5}, ["or"]),
     Piece("Roller", "roue", 30, {"vitesse": 15, "resistance": 2, "poids": 1}),
-    Piece("pneu carrée", "roue", 20, {"vitesse": 5, "resistance": 5, "poids": 3}, ["carré"]),
+    Piece("pneu carré", "roue", 20, {"vitesse": 5, "resistance": 5, "poids": 3}, ["carré"]),
     Piece("Chenille (l'animal)", "roue", 15, {"vitesse": 2, "resistance": 10, "poids": 5}, ["chenille"]),
     Piece("les petites roues", "roue", 5, {"vitesse": 3, "resistance": 1, "poids": 1}, ["petit"]),
-    Piece("roue arriere de l'avant", "roue", 250, {"vitesse": 500, "resistance": 1000, "poids": 2}, ["arriere"]),
-    Piece("roue arriere de l'arriere", "roue", 250, {"vitesse": 1000, "resistance": 500, "poids": 2}, ["arriere"]),
-    Piece("rn"),
-    Piece("lfi"),
-    Piece("ecologiste les vert"),
-    Piece("en marche"),
-    Piece("roue du destin"),
-    Piece("chenilles Max", "roue", 999999, {"vitesse": 10000, "resistance": 5000, "poids":-7}
-    
+    Piece("smeg-roue", "roue", 60, {"vitesse": 30, "resistance": 30, "poids": 5}, ["smeg"]),
+
     # Châssis
     Piece("Châssis bois", "chassis", 15, {"resistance": 20, "poids": 10}),
     Piece("Châssis acier", "chassis", 60, {"resistance": 60, "poids": 30}),
@@ -60,8 +55,7 @@ CATALOGUE = [
     Piece("Coque Rhinoshield", "chassis", 200, {"resistance": 200, "poids": 100}, ["rhinoshield"]),
     Piece("chasse des scies", "chassis", 100, {"resistance": 50, "poids": 20}, ["scie"]),
     Piece("Sacré châssis", "chassis", 500, {"resistance": 500, "poids": 200}, ["sacré"]),
-    Piece("Le chat sept", "chassis", 300, {"resistance": 666, "poids": 150}, ["chat"]),
-    Piece("armature en Lonsdaléite", 9999999999, {"resistance": 9999, "poids":999},
+    Piece("smeg-chassis", "chassis", 150, {"resistance": 150, "poids": 50}, ["smeg"]),
     # Bateaux et avions
     Piece("Coque gonflable", "coque", 20, {"resistance": 15, "vitesse": 5, "poids": 3}),
     Piece("Coque titane", "coque", 150, {"resistance": 100, "poids": 40}),
@@ -76,49 +70,89 @@ CATALOGUE = [
     Piece("Armature métallique", "armature", 50, {"resistance": 50, "poids": 20}),
 
     # Gears
-    Piece("Turbo", "gear", 100, {"vitesse": 20, "poids": 5}),
-    Piece("Canon", "gear", 300, {"puissance": 250, "poids": 50}),
-    Piece("Bouclier", "gear", 200, {"resistance": 100, "poids": 30}),
+    Piece("Turbo", "gear", 100, {"vitesse": 20, "poids": 5}, ["turbo"]),
+    Piece("Canon", "gear", 300, {"puissance": 250, "poids": 50}, ["canon"]),
+    Piece("Bouclier", "gear", 200, {"resistance": 100, "poids": 30}, ["bouclier"]),
     Piece("Ailerons", "gear", 150, {"vitesse": 15, "poids": 10}),
-    Piece("Lance-flammes", "gear", 250, {"puissance": 200, "poids": 40}),
-    Piece("Remorque", "gear", 80, {"resistance": 50, "poids": 20}),
+    Piece("Lance-flammes", "gear", 250, {"puissance": 200, "poids": 40}, ["flammes"]),
+    Piece("Remorque", "gear", 80, {"resistance": 50, "poids": 20}, ["remorque"]),
+    Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
     Piece("la barbe de gandalf", "gear", 500, {"resistance": 1024, "poids": 8}, ["barbe"]),
     Piece("joueur de lol main et pieds", "gear", 1000, {"puissance": 500, "vitesse": 500, "resistance": 500, "poids": 50}, ["lol"]),
-    Piece("Sarbacane Papier", "gear", 50, {"puissance": 10, "vitesse": 5, "poids": 1}, ["sarbacane"]),
-    Piece("MDL suprême", "gear", 9999999, {"puissance": 1000, "vitesse": 5678, "poids": 11, ["MDL"]),
-    Piece("Grand chef suprême", "gear", 99999, {"puissance": 999, "vitesse": 6234, ["GCS"]),
-    Piece("Divinité", "gear", 999999, {"puissance": 99999, "vitesse": 623994, ["DIVIN"])
-    
-    # Divers (Boss)
-    Piece("la calvitie du démon", "chassis", 50, {"resistance": 40, "poids": 0}, ["demon"]),
-    Piece("le bus de Staline", "chassis", 300, {"resistance": 300, "poids": 150}),
-    Piece("lfi", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
-    Piece("rn", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
-    Piece("ecologiste les vert", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
-    Piece("en marche", "gear", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+]
+
+# Pièces signature des boss : introuvables en boutique
+PIECES_BOSS = [
+    # Arnaud
+    Piece("Les gambettes du démon", "moteur", 999, {"puissance": 666, "vitesse": 333, "poids": 10}, ["demon"]),
+    Piece("roue arriere de l'avant", "roue", 250, {"vitesse": 50, "resistance": 1000, "poids": 2}, ["arriere"]),
+    Piece("roue arriere de l'arriere", "roue", 250, {"vitesse": 100, "resistance": 500, "poids": 2}, ["arriere"]),
+    Piece("Le chat sept", "chassis", 300, {"resistance": 666, "poids": 150}, ["chat"]),
+    # Bezard
+    Piece("rn", "roue", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("lfi", "roue", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("ecologiste les vert", "roue", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("en marche", "roue", 80, {"puissance": 30, "vitesse": 10, "poids": 10}),
+    Piece("la calvitie du démon", "chassis", 50, {"resistance": 4000, "poids": 0}, ["demon"]),
+    Piece("le bus de Staline", "chassis", 300, {"resistance": 9000, "poids": 150}),
     Piece("barbe rousse", "gear", 40, {"resistance": 15, "poids": 3}),
-    Piece("le communisme", "gear", 500, {"puissance": 300, "resistance": 100, "poids": 20}),
-    Piece("Heart of the machine", "core", 99999999, {"puissance": 12345, "resistance": 10000}),
-    Piece("Divinité Suprême", "Divinity", 99999999, {"vitesse": 25600, "puissance": 25600, "resistance": 25600)
+    Piece("le communisme", "gear", 500, {"puissance": 450, "resistance": 1917, "poids": 20}),
+    # Professeur Raoult
+    Piece("roue du destin", "roue", 300, {"vitesse": 100, "resistance": 1000, "poids": 5}, ["destin"]),
+    Piece("moteur confiné", "moteur", 3000, {"puissance": 400, "vitesse": 500, "poids": 50}),
+    Piece("chassis médical", "chassis", 3000, {"resistance": 8000, "poids": 100}),
+    Piece("raconter n'importe quoi", "gear", 500, {"puissance": 200, "poids": 5}),
+    Piece("le test pcr", "gear", 500, {"resistance": 800, "poids": 5}, ["bouclier"]),
+    Piece("doc de wish", "gear", 500, {"vitesse": 50, "poids": 1}),
+    # Bally Bagayoko
+    Piece("la force du titan", "moteur", 5000, {"puissance": 350, "vitesse": 1200, "poids": 100}),
+    Piece("retenir les foules", "chassis", 5000, {"resistance": 12000, "poids": 200}),
+    Piece("transport de poubelles enflammées", "gear", 3000, {"puissance": 150, "poids": 50}, ["flammes"]),
+    # Vénère julien (MDL)
+    Piece("moteur 67D", "moteur", 6700, {"puissance": 167, "vitesse": 667, "poids": 76}, ["Boss finale"]),
+    Piece("chenilles Max", "roue", 999999, {"vitesse": 400, "resistance": 1000, "poids":-7}),
+    Piece("armature en Lonsdaléite", "chassis", 9999999999, {"resistance": 6767, "poids":999}),
+    Piece("Heart of the machine", "core", 99999999, {"puissance": 200, "resistance": 4000}),
+    Piece("Divinité Suprême", "Divinity", 99999999, {"vitesse": 256, "puissance": 256, "resistance": 2000}),
+    Piece("MDL suprême", "gear", 9999999, {"puissance": 100, "vitesse": 300, "poids": 11}, ["MDL"]),
+    Piece("Grand chef suprême", "gear", 99999, {"puissance": 44, "vitesse": 312}, ["GCS"]),
+    # Pièce ultime : offerte une seule fois, à la première victoire contre Vénère julien
+    Piece("Divinité", "gear", 999999, {"puissance": 99999, "vitesse": 623994}, ["DIVIN"]),
+    Piece("Infinité", "gear", 9999999, {"resistance": 1990}, ["INFINI"]),
 ]
 
 
 def piece(nom):
-    """Renvoie une copie neuve de la pièce du catalogue portant ce nom."""
-    for p in CATALOGUE:
+    """Renvoie une copie neuve de la pièce (boutique ou boss) portant ce nom."""
+    for p in CATALOGUE + PIECES_BOSS:
         if p.nom == nom:
             return p.copie()
     raise KeyError(nom)
 
 
 def creer_vehicule(modele, noms_pieces, nom=None):
+    """Construit un véhicule à partir d'une clé de MODELES et d'une liste de noms de pièces."""
     vehicule = Vehicule(MODELES[modele], nom)
     for nom_piece in noms_pieces:
         vehicule.poser(piece(nom_piece))
     return vehicule
 
 
+def cle_modele(modele):
+    """Clé de MODELES correspondant à cet objet Modele (pour la sauvegarde)."""
+    for cle, m in MODELES.items():
+        if m is modele:
+            return cle
+    raise KeyError(modele.nom)
+
+
+def est_piece_boss(nom):
+    """La pièce de ce nom est-elle réservée aux boss ?"""
+    return any(p.nom == nom for p in PIECES_BOSS)
+
+
 def kit_de_depart():
+    """Les pièces offertes au début de chaque run."""
     return [piece("Roue caoutchouc") for _ in range(4)] + [piece("Moteur banane"), piece("Châssis bois"), piece("Sarbacane Papier")]
 
 
@@ -156,19 +190,19 @@ def adversaire(cle):
             5, 300, "Contrôle de routine ! Vous transportez des bananes ?"),
         "lisa": lambda: Adversaire(
             "La Lisa mobile",
-            creer_vehicule("33 tonnes", ["Moteur de trotinette", "pneu carré"*4, "Coque rinoshield"], "indescamion"),
+            creer_vehicule("33 tonnes", ["Moteur de trottinette"] + ["pneu carré"] * 4 + ["Coque Rhinoshield"], "indescamion"),
             3, 67, "Je sais pas ça dépend pourquoi j'ai tué la personne"),
         "julien": lambda: Adversaire(
             "Ride a bike",
-            creer_vehicule("cyclo-moteur", ["Moteur d'avion de chasse", "chenille (l'animal)"*2, "chasse des scies"], "Le cyclo-démonteur"),
+            creer_vehicule("cyclo-moteur", ["Moteur d'avion de chasse"] + ["Chenille (l'animal)"] * 2 + ["chasse des scies"], "Le cyclo-démonteur"),
             6, 700, "Qui pisse face au vent s'en rince les dents"),
         "etham": lambda: Adversaire(
             "La coulombie",
-            creer_vehicule("roller", ["petit mais puissant", "les petites roues"*8, "sacré chassis"], "Lauralleur"),
+            creer_vehicule("roller", ["Petit mais puissant"] + ["les petites roues"] * 8 + ["Sacré châssis"], "Lauralleur"),
             2, 100, "Tout pour les states"),
         "crombez": lambda: Adversaire(
             "la treu-treu 3000",
-            creer_vehicule("treu-treu", ["le mot 'teur'", "ailes de poulet", "la coke"], "LA treu-treu a la colique"),
+            creer_vehicule("treu-treu", ["Mot 'teur'", "Aile de poulet", "La coke"], "LA treu-treu a la colique"),
             8, 587, "Avec le linge les cours et les repas j'ai quand même le temps de te battre"),
         "Arnaud": lambda: Adversaire(
             "Le vélo sacré de Mr Arnaud",
@@ -179,8 +213,8 @@ def adversaire(cle):
             creer_vehicule("bouc", ["la calvitie du démon", "lfi","rn","ecologiste les vert","en marche", "barbe rousse","le bus de Staline","le communisme"], "le saint graal"),
             11, 19391945, "Je vais te prendre comme j'ai pris la Bastille"),
         "smegma": lambda: Adversaire(
-            "LA smeg-moblie",
-            creer_vehicule("voiture", ["smeg-roue"*4, "le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
+            "LA smeg-mobile",
+            creer_vehicule("voiture", ["smeg-roue"] * 4 + ["le smeg-moteur", "smeg-chassis"], "La polo 5 de zinzin"),
             7, 800, "Merci pour seub"),
         "Bally Bagayoko": lambda: Adversaire(
             "La blocus-mobile",
@@ -188,19 +222,19 @@ def adversaire(cle):
             11, 64000000, "ARRETEZ!!!! RECULEZ!!!"),
         "Professeur Raoult": lambda: Adversaire(
             "Covid-truck",
-            creer_vehicule("voiture", ["roue du destin"*4,"moteur confiné","chassis médical"],"raconter n'importe quoi","le test pcr", "doc de wish"),
+            creer_vehicule("covid-truck", ["roue du destin"] * 4 + ["moteur confiné", "chassis médical", "raconter n'importe quoi", "le test pcr", "doc de wish"]),
             11, 7100000, "l'Hydroxychloroquine c'est bien"),
         "rapido-man": lambda: Adversaire(
             "rapido-man",
-            creer_vehicule("roller", ["Moteur de tondeuse a cheveux","Roller"*6,"Châssis carton"], "roulette-rider"),
+            creer_vehicule("roller", ["Moteur de tondeuse a cheveux"] + ["Roller"] * 8 + ["Châssis carton"], "roulette-rider"),
             1, 20, "La justice arrive sur des petites roues"),
         "ingénium": lambda: Adversaire(
             "tenia ida",
-            creer_vehicule("roller", ["Moteur V8","Roue caoutchouc"*6,"Châssis acier"], "Le délégay des héros"),
+            creer_vehicule("roller", ["Moteur V8"] + ["Roue caoutchouc"] * 8 + ["Châssis acier"], "Le délégay des héros"),
             3, 140, "Ingenium. C'est le nom du héros qui va te vaincre !"),
         "sonic": lambda: Adversaire(
             "le hérisson bleu",
-            creer_vehicule("trottinette", ["Roue en or","pneu carrée","Moteur F1"], "Blue trot"),
+            creer_vehicule("trottinette", ["Roue en or","pneu carré","Moteur F1"], "Blue trot"),
             5, 500, "Faut que je speed!!!"),
         "Flash": lambda: Adversaire(
             "L'éclair rouge",
@@ -212,39 +246,51 @@ def adversaire(cle):
             9, 900, " Wakanda Foreeeeeeveeeeeeeer !"),
         "flash mcqueen": lambda: Adversaire(
             "le rookie",
-            creer_vehicule("voiture", ["Roue en or"*4,"Moteur de fusée","Coque Rhinoshield"], "vrouum vrouum"),
+            creer_vehicule("voiture", ["Roue en or"] * 4 + ["Moteur fusée", "Coque Rhinoshield"], "vrouum vrouum"),
             10, 1000, " Katchaoww"),
         "Saddam Hussein Al-Majid": lambda: Adversaire(
             "Le boucher de Bagdad",
-            creer_vehicule("33 tonnes", ["Roue en or"*4,"Moteur de fusée","Coque Rhinoshield"], "vrouum vrouum"),
-            10, 1000, " Katchaoww"),
+            creer_vehicule("33 tonnes", ["Moteur fusée"] + ["Roue en or"] * 4 + ["Coque Rhinoshield"], "Le palais roulant"),
+            10, 1000, "Même mes jantes sont en or. Et toi, t'as quoi ?"),
 
 
         #Boss finale secréte
         "Vénère julien": lambda: Adversaire(
             "S'est fait N**é a la MDL",
-            creer_vehicule("MDL", ["moteur 67D", "chenilles Max"*2, "armature en Lonsdaléite", "Heart of the machine", "Divinité Suprême", "MDL suprême", "Infinité", "Grand chef suprême"], "La MDL de la mort qui tue", nb_gear=3),
-        ),
+            creer_vehicule("MDL", ["moteur 67D"] + ["chenilles Max"] * 2 + ["armature en Lonsdaléite", "Heart of the machine", "Divinité Suprême", "MDL suprême", "Infinité", "Grand chef suprême"], "La MDL de la mort qui tue"),
+            67, 676767676, "SIX... SEEEEPT !"),
         
     }
     return fabriques[cle]()
 
 
-ADVERSAIRES_ARENE = ["kevin", "mamie_turbo", "robot", "gerard"]
+# Triés par niveau. Les boss de branche et le boss final n'y sont pas.
+ADVERSAIRES_ARENE = ["rapido-man", "kevin", "mamie_turbo", "robot", "ingénium", "gerard",
+                     "sonic", "Flash", "Usain Bolt", "flash mcqueen", "Saddam Hussein Al-Majid"]
+# Ceux de l'histoire, pour le mode admin.
+ADVERSAIRES_HISTOIRE = ["etham", "lisa", "speedy", "douane", "moissonneuse", "julien", "smegma", "crombez",
+                        "Arnaud", "Bezard", "Professeur Raoult", "Bally Bagayoko", "Vénère julien"]
 
 
 def adversaires_arene():
+    """Les adversaires de l'arène libre, recréés à neuf."""
     return [adversaire(cle) for cle in ADVERSAIRES_ARENE]
+
+
+def tous_les_adversaires():
+    """Tous les adversaires du jeu, boss compris, recréés à neuf (mode admin)."""
+    return [adversaire(cle) for cle in ADVERSAIRES_ARENE + ADVERSAIRES_HISTOIRE]
 
 
 # --- Commandes libres (hors histoire) ------------------------------------------
 
 def commande_aleatoire():
+    """Tire au hasard une commande libre (hors histoire)."""
     modeles = [
         lambda: Commande("Un livreur de sushis", "Un bateau, n'importe lequel.", 70, modele="Bateau"),
         lambda: Commande("Le facteur", "Une voiture qui roule un peu.", 60,
                          modele="Voiture", stats_min={"vitesse": 30}),
-        lambda: Commande("Un singe savant", "N'importe quoi, du moment qu'il y a une banane.", 40,
+        lambda: Commande("Un singe savant", "N'importe quoi, du moment qu'il y a une banane.", 20,
                          tags_requis=["banane"], bonus_tags={"banane": 20}),
         lambda: Commande("Un pilote du dimanche", "Un avion qui ne se plie pas.", 90,
                          modele="Avion", stats_min={"resistance": 20}, reputation={"C": 1}),

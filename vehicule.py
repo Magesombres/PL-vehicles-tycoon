@@ -1,4 +1,4 @@
-"""Membre 1 — Piece, Modele, Vehicule : catalogue, construction, calcul des stats."""
+"""Ethan C. — Piece, Modele, Vehicule : catalogue, construction, calcul des stats."""
 
 STATS = ("puissance", "vitesse", "resistance", "poids", "valeur")
 
@@ -32,6 +32,8 @@ class Modele:
 
 
 class Vehicule:
+    """Un modèle + les pièces posées dans ses emplacements ; ses stats sont la somme des bonus."""
+
     RESISTANCE_DE_BASE = 10
     TAUX_REVENTE = 0.8
 
@@ -62,12 +64,15 @@ class Vehicule:
         return pieces
 
     def est_complet(self):
+        """Le véhicule n'est utilisable que si tous ses emplacements sont remplis."""
         return all(p is not None for p in self.pieces)
 
     def tags(self):
+        """Tous les tags portés par les pièces du véhicule."""
         return {tag for piece in self.pieces if piece for tag in piece.tags}
 
     def calculer_stats(self):
+        """Somme des bonus ; le poids freine, la valeur dépend du prix des pièces."""
         stats = dict.fromkeys(STATS, 0)
         stats["resistance"] = self.RESISTANCE_DE_BASE
         prix_total = 0
@@ -83,6 +88,7 @@ class Vehicule:
         return stats
 
     def fiche(self):
+        """Description du véhicule : pièce par emplacement, puis stats."""
         lignes = [f"{self.nom} ({self.modele.nom})"]
         for emplacement, piece in zip(self.modele.emplacements, self.pieces):
             lignes.append(f"   - {emplacement:<18} : {piece.nom if piece else '(vide)'}")

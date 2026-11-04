@@ -2,6 +2,7 @@
 
 
 def titre(texte):
+    """Affiche un titre de menu."""
     print(f"\n=== {texte} ===")
 
 
@@ -15,6 +16,7 @@ def demander_nombre(mini, maxi, invite="> "):
 
 
 def oui_non(question):
+    """Pose une question fermée ; renvoie True pour oui."""
     while True:
         reponse = input(f"{question} (o/n) > ").strip().lower()
         if reponse in ("o", "oui"):
@@ -24,4 +26,5 @@ def oui_non(question):
 
 
 def pause():
+    """Attend que le joueur appuie sur Entrée."""
     input("(Entrée pour continuer)")

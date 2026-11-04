@@ -1,4 +1,4 @@
-"""Membre 2 — Arene : combat au tour par tour selon un format."""
+"""Ethan V. — Arene : combat au tour par tour selon un format."""
 
 import random
 
@@ -19,22 +19,25 @@ EVENEMENTS = [
 
 
 class Arene:
+    """Arène de combat au tour par tour : le format choisit la stat boostée et la condition de victoire."""
+
     FORMATS = {
         "combat": {"nom": "Combat", "boost": {"puissance": 2},
                    "victoire": "réduire la résistance adverse à 0"},
         "course": {"nom": "Course", "boost": {"vitesse": 2},
-                   "victoire": "arriver le premier à 300 m"},
+                   "victoire": "arriver le premier (300 m par niveau adverse)"},
         "endurance": {"nom": "Endurance", "boost": {"resistance": 2},
                       "victoire": "tenir 6 tours"},
         "event": {"nom": "Évènement", "boost": {},
                    "victoire": "réduire la résistance adverse à 0"},
     }
-    DISTANCE_COURSE = 300
+    DISTANCE_PAR_NIVEAU = 300  # la course est plus longue contre un adversaire de haut niveau
     TOURS_ENDURANCE = 6
     TOURS_MAX = 30
 
     def __init__(self, format="combat"):
         self.format = format
+        self.distance_cible = self.DISTANCE_PAR_NIVEAU
         self.evenement = random.choice(EVENEMENTS) if format == "event" else None
         self.multiplicateurs = self.evenement["boost"] if self.evenement else self.FORMATS[format]["boost"]
 
@@ -50,7 +53,11 @@ class Arene:
         """p1 est le joueur. Renvoie le pilote gagnant, ou None en cas de match nul."""
         infos = self.FORMATS[self.format]
         titre(f"ARÈNE — {infos['nom']} : {p1.nom} VS {p2.nom}")
-        print(f"Objectif : {infos['victoire']}.")
+        if self.format == "course":
+            self.distance_cible = self.DISTANCE_PAR_NIVEAU * getattr(p2, "niveau", 1)
+            print(f"Objectif : arriver le premier à {self.distance_cible} m.")
+        else:
+            print(f"Objectif : {infos['victoire']}.")
         if self.evenement:
             print(f"Règle du jour : {self.evenement['nom']} — {self.evenement['regle']}")
         if hasattr(p2, "replique"):
@@ -86,6 +93,7 @@ class Arene:
         return None
 
     def executer(self, pilote, cible, action):
+        """Applique l'action choisie par le pilote (attaquer, foncer, capacité ou se protéger)."""
         pilote.protection = 1
         if action == "attaquer":
             degats = pilote.attaquer(cible)
@@ -102,19 +110,21 @@ class Arene:
             print(f"{pilote.nom} se protège.")
 
     def verifier_victoire(self, p1, p2):
+        """Renvoie le gagnant si le match est fini, sinon None."""
         if p2.pv <= 0:
             return p1
         if p1.pv <= 0:
             return p2
         if self.format == "course":
             for pilote in (p1, p2):
-                if pilote.distance >= self.DISTANCE_COURSE:
+                if pilote.distance >= self.distance_cible:
                     return pilote
         return None
 
     def afficher_etat(self, p1, p2):
+        """Affiche les PV des deux pilotes (et leur distance en course)."""
         for p in (p1, p2):
             ligne = f"{p.nom:<30} PV {p.pv}/{p.stats_combat['resistance']}"
             if self.format == "course":
-                ligne += f"   Distance {p.distance}/{self.DISTANCE_COURSE} m"
+                ligne += f"   Distance {p.distance}/{self.distance_cible} m"
             print(ligne)

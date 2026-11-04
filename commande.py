@@ -1,7 +1,9 @@
-"""Membre 3 — Commande : un client, des exigences, une récompense."""
+"""Julien L. — Commande : un client, des exigences, une récompense."""
 
 
 class Commande:
+    """Un client qui veut un véhicule respectant des exigences : modèle, stats minimales, tags."""
+
     def __init__(self, client, description, prix, modele=None, stats_min=None,
                  tags_requis=None, bonus_tags=None, reputation=None):
         self.client = client
@@ -38,6 +40,7 @@ class Commande:
         return total
 
     def exigences(self):
+        """Texte lisible des exigences de la commande."""
         morceaux = []
         if self.modele:
             morceaux.append(self.modele)
@@ -47,4 +50,5 @@ class Commande:
         return ", ".join(morceaux) or "aucune exigence"
 
     def resume(self):
+        """Une ligne de résumé pour le menu Commandes."""
         return f"{self.client} — « {self.description} » ({self.exigences()}) → {self.prix} $"

@@ -10,23 +10,24 @@ from evenements import EvenementChoix, EvenementCombat, EvenementCommande
 
 INTRO = """
 Tu as 17 ans. Tes journées : Minecraft, pignouf, pignoufff.
-Un matin, tes parents te dégagent de la maison et te donnant 1 carton.
+Un matin, tes parents te dégagent de la maison en te donnant un carton.
 4 roues, 1 moteur.
-Le chassis ? avec le carton. Une arme : Avec le papier journal.
-Tu a toujours rêvé de construire des véhicules. Tu n'a jamais réflechie a les faire rouler.
+Le châssis ? Avec le carton. Une arme ? Avec du papier journal.
+Tu as toujours rêvé de construire des véhicules. Tu n'as jamais réfléchi à les faire rouler.
 « Tu veux manger ? Construis des trucs et vends-les. Bisous. »
-La porte se referme. Ton garage, c'est dehors
+La porte se referme. Ton garage, c'est dehors.
 Objectif : GAGNER UN MAX DE THUNE.
 """
 
 def tronc_commun():
+    """Les événements du début, communs à toutes les runs."""
     return [
         EvenementChoix(
             "Dehors !",
-            "Tu regardes ton carton de pièces. Comment construire ton premier véhicules ?",
+            "Tu regardes ton carton de pièces. Comment construire ton premier véhicule ?",
             [
-                ("Construire un truc qui va VITE. Mais t'a pas de frein. tant pis c'est pas toi qui roulera avec", {"reputation": {"A": 1}}),
-                ("Construire un truc qui fait MAL. De toute facon il tapera pas sur toi.", {"reputation": {"B": 1}}),
+                ("Construire un truc qui va VITE. Mais t'as pas de freins. Tant pis, c'est pas toi qui rouleras avec.", {"reputation": {"A": 1}}),
+                ("Construire un truc qui fait MAL. De toute façon, il tapera pas sur toi.", {"reputation": {"B": 1}}),
                 ("Lire le manuel. Il y a un manuel ?", {"reputation": {"C": 1}}),
                 ("Demander du boulot au voisin louche.", {"reputation": {"D": 1}, "argent": 10,
                                                           "message": "Il te glisse 10 $ « pour plus tard »."}),
@@ -34,7 +35,7 @@ def tronc_commun():
         ),
         EvenementCommande(
             "Premier client",
-            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce qu'elle conduit mal ».\n (ça se voyait à sa tête après...)\n"
+            "Mamie Josette toque à la cabane. Elle veut une voiture « solide, parce qu'elle conduit mal ».\n(Ça se voyait à sa tête...)\n"
             "Elle a l'air de beaucoup aimer les bananes.",
             Commande("Mamie Josette", "Une voiture solide pour aller au marché.", 60,
                     modele="Voiture", stats_min={"resistance": 30}, bonus_tags={"banane": 10}, reputation={"C": 1}),
@@ -44,9 +45,9 @@ def tronc_commun():
             "Le voisin te tend un colis qui fait un léger bruit de glouglou.\n« Tu le livres à l'autre bout de la ville ? 30 $. »",
             [
                 ("Accepter sans poser de question. Il te faut de l'argent.", {"reputation": {"D": 2}, "argent": 30}),
-                ("Demander si ça explose. Tu le donneras au autres.", {"reputation": {"B": 2},
+                ("Demander si ça explose. Tu le donneras aux autres.", {"reputation": {"B": 2},
                                               "message": "« Seulement si tu le secoues. » Intéressant."}),
-                ("Analyser le liquide d'abord. Qui sait ? Ca pourrait être un bon carburant.", {"reputation": {"C": 2},
+                ("Analyser le liquide d'abord. Qui sait ? Ça pourrait être un bon carburant.", {"reputation": {"C": 2},
                                                    "message": "C'est du jus de banane fermenté. Fascinant."}),
                 ("Le livrer en 4 minutes chrono. Top départ.", {"reputation": {"A": 2}, "argent": 30}),
             ],
@@ -64,14 +65,15 @@ def tronc_commun():
                 ("Le plus rapide de l'univers.", {"reputation": {"A": 3}}),
                 ("Le plus destructeur de l'univers.", {"reputation": {"B": 3}}),
                 ("Le plus savant de l'univers.", {"reputation": {"C": 3}}),
-                ("J'y ait pas réflechie.", {"reputation": {"D": 3}}),
+                ("J'y ai pas réfléchi.", {"reputation": {"D": 3}}),
             ],
         ),
     ]
 
 
 def branche(lettre):
-    return {"A": branche_a, "B": branche_b, "C": branche_c, "D": branche_d}[lettre]()
+    """Les événements de la branche demandée (A, B, C, D ou final)."""
+    return {"A": branche_a, "B": branche_b, "C": branche_c, "D": branche_d, "final": boss_final}[lettre]()
 
 
 def branche_a():
@@ -88,9 +90,15 @@ def branche_a():
             "Speedy Gonzalès Jr t'a vu livrer Luigi. Il exige une course. Tout de suite.",
             adversaire("speedy"), Arene("course"),
         ),
+        EvenementCombat(
+            "Le cyclo-démonteur",
+            "Un cyclo-moteur avec un moteur d'avion de chasse te colle au pare-choc.\n"
+            "Il roule sur des chenilles. Des vraies. Des animaux. « Course. Maintenant. »",
+            adversaire("julien"), Arene("course"),
+        ),
         EvenementChoix(
             "Le mur du son",
-            "T'a allumé ton moteur et avec tes conneries tout devient blanc.\nTu viens de passer le mur du son. Derrière, un panneau :\n« Mur de la lumière — 3 km ».",
+            "T'as allumé ton moteur et, avec tes conneries, tout devient blanc.\nTu viens de passer le mur du son. Derrière, un panneau :\n« Mur de la lumière — 3 km ».",
             [
                 ("Accélérer.", {"message": "Évidemment."}),
                 ("Accélérer, mais en criant.", {"message": "Personne ne t'entend : tu vas trop vite."}),
@@ -103,18 +111,24 @@ def branche_a():
             Commande("Un physicien essoufflé", "Une voiture absurdement rapide.", 1000,
                      modele="Voiture", stats_min={"vitesse": 300}),
         ),
+        EvenementCombat(
+            "La treu-treu 3000",
+            "Elle a fini le linge, les cours et les repas. Il lui reste dix minutes.\n"
+            "Assez pour décoller avec ses ailes de poulet et te barrer la route.",
+            adversaire("crombez"), Arene("combat"),
+        ),
         EvenementChoix(
-            "Une limite a la vitesse ?",
-            "Pour toi, aucune limite à la vitesse. Mais pour la physique, si. Tu viens de passer le mur de la lumière.\n",
+            "Une limite à la vitesse ?",
+            "Pour toi, aucune limite à la vitesse. Mais pour la physique, si. Tu viens de passer le mur de la lumière.",
             [
-                ("Bah tu vois rien ducoup", {"message": "Évidemment."}),
-                ("Mais si tu vois,... de la lumière", {"message": "Enfin physyquement, tu vois rien. Mais tu est sur de voir de la lumière."}),
-                ("Prends des notes", {"argent": 100, "message": "Tu vendras ta recherche +100 $"}),
+                ("Bah, tu vois rien du coup.", {"message": "Évidemment."}),
+                ("Mais si, tu vois... de la lumière.", {"message": "Enfin, physiquement, tu vois rien. Mais tu es sûr de voir de la lumière."}),
+                ("Prendre des notes.", {"argent": 100, "message": "Tu vendras tes recherches. +100 $"}),
             ],
         ),
         EvenementCombat(
             "Le mur de la vitesse",
-            "Dans la lumière tu le vois descendre... devant toi il se tient, L'ultime MUR, Tu le défie sans hésiter",
+            "Dans la lumière, tu le vois descendre... Devant toi se tient l'ultime MUR. Tu le défies sans hésiter.",
             adversaire("Arnaud"), Arene("course"),
         )
     ]
@@ -123,6 +137,12 @@ def branche_a():
 def branche_b():
     """B — Du sang ! : puissance."""
     return [
+        EvenementCombat(
+            "L'indescamion",
+            "Un 33 tonnes à pneus carrés bloque la rue. Il avance d'un mètre par heure,\n"
+            "mais rien ne le traverse. Sa conductrice a l'air de savoir ce qu'elle fait. C'est pire.",
+            adversaire("lisa"), Arene("combat"),
+        ),
         EvenementCombat(
             "Le Monster Truck",
             "Gérard a entendu parler de toi. Son Monster Truck a faim.",
@@ -140,17 +160,17 @@ def branche_b():
             adversaire("moissonneuse"), Arene("endurance"),
         ),
         EvenementChoix(
-            "Que'est-ce que la puissance ?",
+            "Qu'est-ce que la puissance ?",
             "Tu as beaucoup de puissance. Mais qu'est-ce que la puissance ?",
             [
                 ("La puissance, c'est la puissance.", {"message": "Évidemment."}),
-                ("Mais t'est pas philosophe, tu tape sur des gens, pas des poisons.", {"message": "Ouais pas besoin de réflechir."}),
-                ("La puissance c'est pour protéger,... TA THUNE.", {"argent": 100, "message": "Votre patrimoine vous rapporte +100 $"}),
+                ("Mais t'es pas philosophe, tu tapes sur des gens, pas des poissons.", {"message": "Ouais, pas besoin de réfléchir."}),
+                ("La puissance, c'est pour protéger... TA THUNE.", {"argent": 100, "message": "Ton patrimoine te rapporte. +100 $"}),
             ]
         ),
         EvenementCombat(
-            "Toujours plus fort que soit",
-            "C'est faux et tu vas le prouver",
+            "Toujours plus fort que soi",
+            "C'est faux et tu vas le prouver.",
             adversaire("Bezard"), Arene("combat"),
         ),
         EvenementChoix(
@@ -174,13 +194,19 @@ def branche_c():
             Commande("Professeure Tournesol", "Un bateau indestructible.", 300,
                      modele="Bateau", stats_min={"resistance": 100}, reputation={"C": 1}),
         ),
+        EvenementCombat(
+            "Le labo se rebelle",
+            "Le robot aspirateur du labo a lu tous les articles de la professeure.\n"
+            "Il veut maintenant aspirer le monde. Il commence par toi.",
+            adversaire("robot"), Arene("combat"),
+        ),
         EvenementChoix(
             "L'expérience",
             "La professeure veut mettre un moteur banane dans un accélérateur de particules.",
             [
                 ("Pour la science !", {"argent": 150, "message": "Tu découvres le boson de banane. Prime : 150 $."}),
                 ("Écrire un article dessus.", {"argent": 80, "message": "Publié dans « Nature (des fruits) ». +80 $"}),
-                ("Manger la banane.", {"message": "Elle avait un goût de neutrino. Pas très bon a mon avis."}),
+                ("Manger la banane.", {"message": "Elle avait un goût de neutrino. Pas très bon, à mon avis."}),
             ],
         ),
         EvenementCommande(
@@ -191,18 +217,18 @@ def branche_c():
         ),
         EvenementChoix(
             "L'espace",
-            "Tu as quitté l'atmosphère. Tu es dans l'espace. Il n'y a pas de gravité. Il n'y a pas d'air. Il n'y a que toi. \n Attends ... Il n'y a aucun concurrent, OUVRE TON GARAGE SPATIAL !",
+            "Tu as quitté l'atmosphère. Tu es dans l'espace. Il n'y a pas de gravité. Il n'y a pas d'air. Il n'y a que toi.\nAttends... Il n'y a aucun concurrent. OUVRE TON GARAGE SPATIAL !",
             [
-                ("Choisir la lune.", {"message": "Mais ou a tu la tete ?"}),
-                ("L'espace entier", {"message": "Tu as raison, l'espace est grand."}),
-                ("Mars c'est bien.", {"message": "Fera un peu chaud. Et froid."}),
-                ("Pourquoi se limiter a une galaxie ?", {"message": "L'espace sera a toi"}),
+                ("Choisir la Lune.", {"message": "Mais où as-tu la tête ?"}),
+                ("L'espace entier.", {"message": "Tu as raison, l'espace est grand."}),
+                ("Mars, c'est bien.", {"message": "Il fera un peu chaud. Et froid."}),
+                ("Pourquoi se limiter à une galaxie ?", {"message": "L'espace sera à toi."}),
             ],
         ),
         EvenementCombat(
-            "Apres espace",
-            "L'espace, les dimensions, tu comprends pas trop tout ca. Mais tu vas devoir utiliser tes 2 neurones au garrot pour prouver a la NASB que l'espace t'appartiens",
-            adversaire("Prof Raoult"), Arene("combat"),
+            "Après l'espace",
+            "L'espace, les dimensions, tu comprends pas trop tout ça. Mais tu vas devoir utiliser tes 2 neurones au garrot pour prouver à la NASB que l'espace t'appartient.",
+            adversaire("Professeur Raoult"), Arene("combat"),
         )
     ]
 
@@ -210,6 +236,12 @@ def branche_c():
 def branche_d():
     """D — Livraison : clients louches."""
     return [
+        EvenementCombat(
+            "Livraison express",
+            "Ta première livraison louche… et un type en rollers géants te double sur le trottoir.\n"
+            "« Le premier arrivé garde le colis. »",
+            adversaire("etham"), Arene("course"),
+        ),
         EvenementCommande(
             "Monsieur X",
             "Un homme en lunettes noires (de nuit) veut une voiture « qui ne laisse pas de traces ». En carton, donc.",
@@ -231,6 +263,38 @@ def branche_d():
             "Sirènes ! La brigade des douanes volantes te prend en chasse. Sème-les !",
             adversaire("douane"), Arene("course"),
         ),
+        EvenementCombat(
+            "La smeg-mobile",
+            "Une Polo 5 déglinguée te fait des appels de phares. Son pilote dit qu'il te doit un service.\n"
+            "Il ment.",
+            adversaire("smegma"), Arene("combat"),
+        ),
+        EvenementCombat(
+            "Le blocus",
+            "Au bout de la rue : une foule, des poubelles en feu et un costard-cravate qui bloque tout.\n"
+            "Ton dernier colis est de l'autre côté. Il va falloir passer.",
+            adversaire("Bally Bagayoko"), Arene("combat"),
+        ),
+    ]
+
+
+def boss_final():
+    """Débloqué une fois les 4 branches (et leurs 4 boss) terminées."""
+    return [
+        EvenementChoix(
+            "La MDL",
+            "Quatre voies, quatre fins, quatre boss à terre. Et une rumeur : à la MDL, quelqu'un a tout vu.\n"
+            "Il t'attend. Il est vénère.",
+            [
+                ("Y aller.", {"message": "Évidemment."}),
+                ("Y aller, mais avec un goûter.", {"message": "Il ne partagera pas."}),
+            ],
+        ),
+        EvenementCombat(
+            "Vénère julien",
+            "La MDL de la mort qui tue démarre. Le sol tremble. Ton compte en banque aussi.",
+            adversaire("Vénère julien"), Arene("combat"),
+        ),
     ]
 
 
@@ -239,6 +303,7 @@ ANNONCES = {
     "B": "On murmure ton nom avec crainte. Les assureurs pleurent. Branche Du sang !",
     "C": "Des scientifiques font la queue devant ta cabane. Branche Science.",
     "D": "Ton téléphone sonne. Numéro masqué. Encore. Branche Livraison.",
+    "final": "Les 4 boss sont tombés. Quelque part, une porte de MDL claque. BOSS FINAL SECRET.",
 }
 
 FINS = {
@@ -250,4 +315,6 @@ FINS = {
          "Des voitures dans l'espace. La science est fière. Les astronautes beaucoup moins.",
     "D": "En passant devant la poste, tu vois une affiche : « CIBLE PRIORITAIRE ».\n"
          "C'est ta tête. Tu ne sais absolument pas pourquoi. Le colis faisait toujours tic-tac.",
+    "final": "La MDL de la mort qui tue s'éteint. Vénère julien est un peu moins vénère.\n"
+             "Plus aucun rival, plus aucune voie à explorer. Objectif GAGNER UN MAX DE THUNE : accompli.",
 }
