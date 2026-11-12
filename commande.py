@@ -49,6 +49,6 @@ class Commande:
         morceaux += [f"bonus {tag} +{bonus} $" for tag, bonus in self.bonus_tags.items()]
         return ", ".join(morceaux) or "aucune exigence"
 
-    def resume(self):
-        """Une ligne de résumé pour le menu Commandes."""
+    def __str__(self):
+        """Une ligne de résumé pour le menu Commandes (utilisée par print et les f-strings)."""
         return f"{self.client} — « {self.description} » ({self.exigences()}) → {self.prix} $"

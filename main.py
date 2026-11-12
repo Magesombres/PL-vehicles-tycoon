@@ -1,24 +1,30 @@
 """Point d'entrée : affiche le titre puis le menu principal (choix de la sauvegarde)."""
 
+import couleurs
 import sauvegarde
 from jeu import Jeu
 from outils import demander_nombre, oui_non, titre
 
 
 def menu_principal():
-    """Écran d'accueil : choix d'une des 5 sauvegardes, ou du mode admin."""
+    """Écran d'accueil : choix d'une des 5 sauvegardes, du mode admin ou des couleurs."""
     choix_admin = sauvegarde.NB_EMPLACEMENTS + 1
+    choix_couleurs = choix_admin + 1
     while True:
         titre("PL VEHICLES TYCOON — MENU PRINCIPAL")
         for emplacement in range(1, sauvegarde.NB_EMPLACEMENTS + 1):
             print(f"{emplacement}. Sauvegarde {emplacement} : {sauvegarde.resume(sauvegarde.lire(emplacement))}")
         print(f"{choix_admin}. Mode admin (pour tester le jeu : partie à part, non sauvegardée)")
+        etat = couleurs.colorer("oui", "vert") if couleurs.actives else "non"
+        print(f"{choix_couleurs}. Couleurs : {etat} (à couper si des codes bizarres comme [31m s'affichent)")
         print("0. Quitter le jeu")
-        emplacement = demander_nombre(0, choix_admin)
+        emplacement = demander_nombre(0, choix_couleurs)
         if emplacement == 0:
             return
         if emplacement == choix_admin:
             Jeu(None, "Admin", admin=True).lancer()
+        elif emplacement == choix_couleurs:
+            couleurs.actives = not couleurs.actives
         else:
             ouvrir(emplacement)
 

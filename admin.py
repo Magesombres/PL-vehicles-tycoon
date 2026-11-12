@@ -44,7 +44,7 @@ def afficher_etat(jeu):
     if jeu.etape < len(jeu.evenements):
         print(f"Étape en cours : {decrire(jeu.evenements[jeu.etape])}")
     if jeu.commande_histoire:
-        print(f"Commande d'histoire à livrer : {jeu.commande_histoire.resume()}")
+        print(f"Commande d'histoire à livrer : {jeu.commande_histoire}")
     print(f"Réputation : {jeu.joueur.reputation}")
     print(jeu.bilan())
 

@@ -4,11 +4,14 @@ jouer(jeu) renvoie True quand l'étape d'histoire est validée, False sinon
 (elle sera rejouée au prochain retour au garage).
 """
 
+from abc import ABC, abstractmethod
+
+from couleurs import colorer
 from outils import titre, demander_nombre, oui_non, pause
 
 
-class Evenement:
-    """Classe mère des événements d'histoire. Chaque enfant redéfinit jouer()."""
+class Evenement(ABC):
+    """Classe mère abstraite des événements d'histoire : chaque enfant doit redéfinir jouer()."""
 
     def __init__(self, titre, texte):
         self.titre = titre
@@ -24,9 +27,9 @@ class Evenement:
             print(self.texte)
             self.deja_vu = True
 
+    @abstractmethod
     def jouer(self, jeu):
         """Joue l'événement. Renvoie True si l'étape d'histoire est validée."""
-        raise NotImplementedError
 
 
 class EvenementChoix(Evenement):
@@ -68,7 +71,7 @@ class EvenementCombat(Evenement):
         if gagnant is jeu.joueur:
             jeu.gagner_combat(self.adversaire)
             return True
-        print("Défaite... Améliore ton véhicule et reviens.")
+        print(colorer("Défaite... Améliore ton véhicule et reviens.", "rouge"))
         return False
 
 
@@ -82,7 +85,7 @@ class EvenementCommande(Evenement):
     def jouer(self, jeu):
         """Ajoute la commande au menu Commandes ; l'histoire avance à la livraison."""
         self.afficher()
-        print(f"Nouvelle commande : {self.commande.resume()}")
+        print(f"Nouvelle commande : {self.commande}")
         print("(À livrer depuis le menu Commandes.)")
         jeu.ajouter_commande_histoire(self.commande)
         pause()

@@ -9,7 +9,8 @@ import donnees
 import histoire
 import sauvegarde
 from arene import Arene
-from outils import demander_nombre, oui_non, pause, titre
+from couleurs import colorer
+from outils import demander_nombre, oui_non, pause, thune, titre
 from pilotes import Joueur
 from vehicule import Vehicule
 
@@ -117,7 +118,8 @@ class Jeu:
 
     def garage(self):
         """Menu de jeu d'une run."""
-        print(f"\n=== GARAGE ===  Thune : {self.joueur.argent} $   (run {self.runs_finies + 1})")
+        print(f"\n{colorer('=== GARAGE ===', 'cyan', 'gras')}  Thune : {thune(self.joueur.argent)}   "
+              f"(run {self.runs_finies + 1})")
         actif = self.joueur.vehicule
         print(f"Véhicule actif : {actif if actif else 'aucun'}")
         actions = [
@@ -306,11 +308,11 @@ class Jeu:
                 return
             modele_piece = pieces[choix - 1]
             if modele_piece.prix > self.joueur.argent:
-                print("Pas assez de thune !")
+                print(colorer("Pas assez de thune !", "rouge"))
                 continue
             self.joueur.argent -= modele_piece.prix
             self.joueur.pieces.append(modele_piece.copie())
-            print(f"Acheté : {modele_piece.nom}")
+            print(colorer(f"Acheté : {modele_piece.nom}", "vert"))
 
     # --- Commandes ---------------------------------------------------------------
 
@@ -328,7 +330,7 @@ class Jeu:
         titre("COMMANDES")
         for i, commande in enumerate(self.commandes, 1):
             marque = "  [HISTOIRE]" if commande is self.commande_histoire else ""
-            print(f"{i}. {commande.resume()}{marque}")
+            print(f"{i}. {commande}{marque}")
         print("0. Retour")
         choix = demander_nombre(0, len(self.commandes))
         if choix:
@@ -341,7 +343,7 @@ class Jeu:
             return False
         problemes = commande.verifier(vehicule)
         if problemes:
-            print(f"{commande.client} refuse :")
+            print(colorer(f"{commande.client} refuse :", "rouge"))
             for probleme in problemes:
                 print(f"  - {probleme}")
             return False
@@ -354,7 +356,7 @@ class Jeu:
             reputation = {branche: points * 2 for branche, points in reputation.items()}
             print("Compétence LOL : réputation doublée !")
         self.appliquer_effets({"reputation": reputation})
-        print(f"{commande.client} est ravi(e) ! +{gain} $")
+        print(f"{commande.client} est ravi(e) ! +{thune(gain)}")
         if commande is self.commande_histoire:
             self.commande_histoire = None
             self.avancer_histoire()
@@ -385,7 +387,7 @@ class Jeu:
         adversaires = adversaires or donnees.adversaires_arene()
         print("\nAdversaires :")
         for i, adv in enumerate(adversaires, 1):
-            print(f"{i}. {adv.nom} (niv. {adv.niveau}) sur {adv.vehicule} — {adv.recompense} $")
+            print(f"{i}. {adv} — {thune(adv.recompense)}")
         print("0. Retour")
         choix = demander_nombre(0, len(adversaires))
         if choix == 0:
@@ -397,7 +399,7 @@ class Jeu:
     def gagner_combat(self, adversaire):
         """Paie la récompense et, contre un boss, donne un trophée."""
         self.joueur.argent += adversaire.recompense
-        print(f"Récompense : +{adversaire.recompense} $")
+        print(f"Récompense : +{thune(adversaire.recompense)}")
         self.gagner_trophee(adversaire)
 
     def gagner_trophee(self, adversaire):
@@ -419,7 +421,7 @@ class Jeu:
         if nom not in self.trophees:  # le mode admin peut l'avoir déjà débloquée
             self.trophees.append(nom)
         self.butin.append(nom)
-        print(f"{intitule} : {nom} ! Débloqué en boutique pour toutes tes runs,")
+        print(f"{colorer(f'{intitule} : {nom} !', 'violet', 'gras')} Débloqué en boutique pour toutes tes runs,")
         print("et un exemplaire t'attendra au garage au début de ta prochaine run.")
 
     # --- Inventaire -----------------------------------------------------------
@@ -454,7 +456,7 @@ class Jeu:
                 prix = vehicule.calculer_stats()["valeur"]
                 self.joueur.argent += prix
                 self.joueur.retirer_vehicule(vehicule)
-                print(f"Vendu pour {prix} $.")
+                print(f"Vendu pour {thune(prix)}.")
             else:
                 self.joueur.pieces += vehicule.demonter()
                 self.joueur.retirer_vehicule(vehicule)

@@ -2,7 +2,8 @@
 
 import random
 
-from outils import titre
+from couleurs import colorer
+from outils import barre, titre
 
 # Règles spéciales du format "event" : une est tirée au hasard à chaque arène.
 # Seuls les véhicules portant une pièce avec ce tag reçoivent le boost.
@@ -61,7 +62,7 @@ class Arene:
         if self.evenement:
             print(f"Règle du jour : {self.evenement['nom']} — {self.evenement['regle']}")
         if hasattr(p2, "replique"):
-            print(f'{p2.nom} : « {p2.replique} »')
+            print(f'{colorer(p2.nom, "violet", "gras")} : « {p2.replique} »')
         p1.preparer_combat(self.multiplicateurs_pour(p1))
         p2.preparer_combat(self.multiplicateurs_pour(p2))
 
@@ -75,7 +76,7 @@ class Arene:
                     pilote.brulure -= 1
             gagnant = self.verifier_victoire(p1, p2)
             if gagnant:
-                print(f"\n>>> {gagnant.nom} remporte le match !")
+                self.annoncer(gagnant, p1)
                 return gagnant
             # Le plus rapide joue en premier
             ordre = sorted([p1, p2], key=lambda p: p.stats_combat["vitesse"], reverse=True)
@@ -84,13 +85,18 @@ class Arene:
                 self.executer(pilote, cible, pilote.choisir_action(cible, self))
                 gagnant = self.verifier_victoire(p1, p2)
                 if gagnant:
-                    print(f"\n>>> {gagnant.nom} remporte le match !")
+                    self.annoncer(gagnant, p1)
                     return gagnant
             if self.format == "endurance" and tour >= self.TOURS_ENDURANCE:
-                print(f"\n>>> {p1.nom} a tenu {tour} tours et remporte le match !")
+                print("\n" + colorer(f">>> {p1.nom} a tenu {tour} tours et remporte le match !", "vert", "gras"))
                 return p1
-        print("\n>>> Tout le monde est fatigué. Match nul.")
+        print("\n" + colorer(">>> Tout le monde est fatigué. Match nul.", "jaune", "gras"))
         return None
+
+    def annoncer(self, gagnant, p1):
+        """Annonce le gagnant : en vert si c'est le joueur (p1), en rouge sinon."""
+        couleur = "vert" if gagnant is p1 else "rouge"
+        print("\n" + colorer(f">>> {gagnant.nom} remporte le match !", couleur, "gras"))
 
     def executer(self, pilote, cible, action):
         """Applique l'action choisie par le pilote (attaquer, foncer, capacité ou se protéger)."""
@@ -122,9 +128,10 @@ class Arene:
         return None
 
     def afficher_etat(self, p1, p2):
-        """Affiche les PV des deux pilotes (et leur distance en course)."""
+        """Affiche les barres de PV des deux pilotes (et de distance en course)."""
         for p in (p1, p2):
-            ligne = f"{p.nom:<30} PV {p.pv}/{p.stats_combat['resistance']}"
+            maxi = p.stats_combat["resistance"]
+            print(f"{p.nom:<30} PV       {barre(p.pv, maxi)} {p.pv}/{maxi}")
             if self.format == "course":
-                ligne += f"   Distance {p.distance}/{self.distance_cible} m"
-            print(ligne)
+                print(f"{'':<30} Distance {barre(p.distance, self.distance_cible, 'cyan')} "
+                      f"{p.distance}/{self.distance_cible} m")

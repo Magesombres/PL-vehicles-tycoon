@@ -11,6 +11,15 @@ python main.py
 
 Python 3, aucune bibliothèque à installer.
 
+Le jeu est en couleurs dans un vrai terminal. Si des codes bizarres comme `[31m` s'affichent
+(IDLE, EduPython...), il suffit de couper les couleurs avec l'entrée **7** du menu principal.
+
+Tests automatiques (14 tests, chacun vérifie une règle du jeu) :
+
+```
+python tests.py
+```
+
 ## Menu principal et sauvegardes
 
 Au lancement, on choisit une des **5 sauvegardes**. Chaque ligne affiche le nom du joueur,
@@ -63,6 +72,8 @@ En course, la distance à parcourir dépend du niveau de l'adversaire (300 m par
 | `main.py` | Point d'entrée et menu principal (choix de la sauvegarde) |
 | `sauvegarde.py` | Lecture et écriture des 5 sauvegardes (JSON) |
 | `admin.py` | Menu du mode admin (triche pour tester le jeu) |
+| `couleurs.py` | Couleurs du terminal, qu'on peut couper |
+| `tests.py` | Tests automatiques (`python tests.py`) |
 | `vehicule.py` | `Piece`, `Modele`, `Vehicule` : construction et calcul des stats |
 | `pilotes.py` | `Pilote`, `Joueur`, `Adversaire` : actions de combat, IA |
 | `arene.py` | `Arene` : combat au tour par tour (combat, course, endurance, event) |
@@ -72,7 +83,7 @@ En course, la distance à parcourir dépend du niveau de l'adversaire (300 m par
 | `competences.py` | Capacités spéciales débloquées par les tags des pièces |
 | `donnees.py` | Modèles, pièces (boutique et boss), adversaires, commandes aléatoires |
 | `histoire.py` | Textes et événements de l'histoire, annonces et fins |
-| `outils.py` | Saisie et affichage |
+| `outils.py` | Saisie et affichage (titres, barres de PV) |
 
 ## Architecture POO
 
@@ -82,6 +93,11 @@ En course, la distance à parcourir dépend du niveau de l'adversaire (300 m par
   le joueur tape au clavier, l'adversaire décide seul.
 - `EvenementChoix`, `EvenementCombat` et `EvenementCommande` héritent de `Evenement`.
   `Jeu` appelle `evenement.jouer(self)` sans connaître le type de l'événement.
+- `Pilote` et `Evenement` sont des **classes abstraites** (`abc`) : on ne peut créer que leurs
+  enfants, et chaque enfant est obligé de redéfinir `choisir_action()` ou `jouer()`.
+- **Encapsulation** : la thune du joueur est une `@property`, qui l'empêche de passer sous 0.
+- `__str__` sur `Piece`, `Vehicule`, `Commande` et `Adversaire` : un simple `print(objet)`
+  affiche une description lisible.
 
 Ajouter un véhicule ou une pièce ne demande aucune nouvelle classe, juste une ligne dans
 `donnees.py` :

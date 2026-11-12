@@ -1,14 +1,15 @@
 """Ethan V. — Pilote, Joueur, Adversaire."""
 
 import random
+from abc import ABC, abstractmethod
 
 import competences
 
 ACTIONS = {"1": "attaquer", "2": "foncer", "3": "proteger"}
 
 
-class Pilote:
-    """Classe mère : nom, véhicule, et tout ce qui sert en combat."""
+class Pilote(ABC):
+    """Classe mère abstraite : nom, véhicule, et tout ce qui sert en combat."""
 
     def __init__(self, nom, vehicule=None):
         self.nom = nom
@@ -33,9 +34,9 @@ class Pilote:
         self.brulure = 0
         self.capacite_utilisee = False
 
+    @abstractmethod
     def choisir_action(self, cible, arene):
         """Redéfinie dans Joueur (clavier) et Adversaire (IA)."""
-        raise NotImplementedError
 
     def capacite_disponible(self):
         """Capacité spéciale utilisable maintenant (tag, pièce, infos), ou None."""
@@ -74,6 +75,16 @@ class Joueur(Pilote):
         self.vehicules = []
         self.reputation = {"A": 0, "B": 0, "C": 0, "D": 0}  # cachée au joueur
 
+    @property
+    def argent(self):
+        """La thune du joueur, lue comme un attribut normal (joueur.argent)."""
+        return self._argent
+
+    @argent.setter
+    def argent(self, valeur):
+        """Chaque modification passe par ici : la thune ne descend jamais sous 0."""
+        self._argent = max(0, valeur)
+
     def choisir_action(self, cible, arene):
         """Le joueur choisit son action au clavier."""
         capacite = self.capacite_disponible()
@@ -104,6 +115,9 @@ class Adversaire(Pilote):
         self.niveau = niveau
         self.recompense = recompense
         self.replique = replique
+
+    def __str__(self):
+        return f"{self.nom} (niv. {self.niveau}) sur {self.vehicule}"
 
     def choisir_action(self, cible, arene):
         """L'IA choisit son action toute seule."""
